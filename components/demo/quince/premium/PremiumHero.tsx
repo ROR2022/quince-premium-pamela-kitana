@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useCallback, useEffect } from "react"
+import { useState, useCallback, useEffect, useRef } from "react"
 import { useMusicContext } from "@/context/music-context"
 import { CarouselApi } from "@/components/ui/carousel"
 import { premiumDemoData } from "./data/premium-demo-data"
@@ -17,6 +17,7 @@ export function PremiumHero() {
   const [isLoaded, setIsLoaded] = useState(false)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [api, setApi] = useState<CarouselApi | null>(null)
+  const apiInitialized = useRef<boolean>(false)
   
   // Contexto de música
   const musicContext = useMusicContext()
@@ -30,15 +31,32 @@ export function PremiumHero() {
   
   // Memoizar handlers para evitar renderizados innecesarios
   const handleApiChange = useCallback((newApi: CarouselApi | null) => {
-    if (newApi) {
-      debug.debugLog('API de carrusel inicializada')
-      newApi.on('select', () => {
-        setCurrentIndex(newApi.selectedScrollSnap())
-      })
-    }
+    // Si no hay API, no hacemos nada
+    if (!newApi) return
     
+    // Si ya tenemos una referencia guardada y es la misma API, no hacemos nada
+    if (api === newApi) return
+    
+    // Guardar la nueva API
     setApi(newApi)
-  }, [debug, setCurrentIndex])
+    
+    // Verificar si ya inicializamos esta API
+    if (!apiInitialized.current) {
+      debug.debugLog('API de carrusel inicializada')
+      console.log('[DEBUG] Primera inicialización de API de carrusel')
+      
+      // Configurar el listener una sola vez
+      const handleSelect = () => {
+        setCurrentIndex(newApi.selectedScrollSnap())
+      }
+      
+      // Registrar el listener
+      newApi.on('select', handleSelect)
+      
+      // Marcar como inicializada
+      apiInitialized.current = true
+    }
+  }, [debug, api, setCurrentIndex])
 
   // Marcar como cargado cuando termina la precarga
   const handleImagesLoaded = useCallback(() => {
