@@ -1,5 +1,4 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
-import Image from 'next/image'
 import {
   Carousel,
   CarouselContent,
@@ -19,88 +18,102 @@ type CarouselBackgroundProps = {
 
 export function CarouselBackground({ 
   images, 
-  fallbackImage, 
-  onApiChange, 
-  debugLog,
-  onLoaded
+  fallbackImage,
+  onApiChange,
+  onLoaded,
+  debugLog
 }: CarouselBackgroundProps) {
   const [isPreloading, setIsPreloading] = useState(true)
-  
-  // Usar un ref para rastrear el montaje del componente
+  const [loadedImages, setLoadedImages] = useState<boolean[]>(() => new Array(images.length).fill(false))
   const isMounted = useRef(true)
+  
+  // Limpiar referencia al desmontar
+  useEffect(() => {
+    return () => {
+      isMounted.current = false
+    }
+  }, [])
   
   // Precargar imágenes
   useEffect(() => {
-    // Esta primera llamada puede estar causando re-renderizados si debugLog cambia
-    // así que la movemos dentro del efecto
-    const imagesToPreload = images?.length > 0 ? images : [fallbackImage]
-    const totalImages = imagesToPreload.length
-    let loadedCount = 0
-    
-    // Función segura para el log que verifica si el componente está montado
-    const safeDebugLog = (message: string) => {
-      if (isMounted.current) {
-        debugLog(message)
-      }
+    const imagesToPreload = [...images]
+    if (fallbackImage && !images.includes(fallbackImage)) {
+      imagesToPreload.push(fallbackImage)
     }
     
-    safeDebugLog(`Precargando ${imagesToPreload.length} imágenes...`)
+    if (imagesToPreload.length === 0) {
+      console.log('[DEBUG-PRELOAD] No hay imágenes para precargar')
+      setIsPreloading(false)
+      onLoaded?.()
+      return
+    }
+    
+    console.log(`[DEBUG-PRELOAD] Comenzando precarga de ${imagesToPreload.length} imágenes`)
+    debugLog(`Precargando ${imagesToPreload.length} imágenes`)
+    
+    let loadedCount = 0
+    const totalImages = imagesToPreload.length
     
     const preloadPromises = imagesToPreload.map((src, index) => {
       return new Promise<void>((resolve, reject) => {
-        // Corregimos la instanciación de HTMLImageElement
         const img = document.createElement('img')
         img.src = src
         img.onload = () => {
           if (!isMounted.current) return
           loadedCount++
-          safeDebugLog(`Imagen ${index} cargada (${loadedCount}/${totalImages})`)
+          console.log(`[DEBUG-PRELOAD] Imagen ${index} precargada (${loadedCount}/${totalImages}) - URL: ${src}`)
+          debugLog(`Imagen ${index} cargada (${loadedCount}/${totalImages})`)
           resolve()
         }
         img.onerror = () => {
           if (!isMounted.current) return
-          safeDebugLog(`Error cargando imagen ${index}`)
+          console.log(`[DEBUG-PRELOAD] Error cargando imagen ${index} - URL: ${src}`)
+          debugLog(`Error cargando imagen ${index}`)
           reject()
         }
       })
     })
     
-    // Timeout de seguridad
-    const timeout = setTimeout(() => {
+    // Consideramos el proceso completo cuando todas las imágenes se cargan o después de un timeout
+    Promise.all(preloadPromises).then(() => {
       if (!isMounted.current) return
-      safeDebugLog('Tiempo de precarga agotado')
+      console.log(`[DEBUG-PRELOAD] Todas las imágenes precargadas exitosamente`)
+      debugLog(`Todas las imágenes precargadas exitosamente`)
       setIsPreloading(false)
       onLoaded?.()
-    }, 5000)
-    
-    Promise.all(preloadPromises)
-      .then(() => {
-        if (!isMounted.current) return
-        safeDebugLog('Todas las imágenes precargadas con éxito')
-        clearTimeout(timeout)
+    }).catch((error) => {
+      if (!isMounted.current) return
+      console.log(`[DEBUG-PRELOAD] Error en precarga: ${error}`)
+      debugLog(`Error en precarga de imágenes`)
+      // Continuamos a pesar de errores de carga
+      setIsPreloading(false)
+      onLoaded?.()
+    })
+
+    // Timeout de seguridad para asegurar que la carga no se queda bloqueada
+    const timeoutId = setTimeout(() => {
+      if (isPreloading && isMounted.current) {
+        console.log('[DEBUG-PRELOAD] Timeout de precarga alcanzado, continuando de todos modos')
+        debugLog('Timeout de precarga, continuando')
         setIsPreloading(false)
         onLoaded?.()
-      })
-      .catch(() => {
-        if (!isMounted.current) return
-        safeDebugLog('Error en precarga de algunas imágenes')
-        clearTimeout(timeout)
-        setIsPreloading(false)
-        onLoaded?.()
-      })
-    
-    // Cleanup function
-    return () => {
-      isMounted.current = false
-      clearTimeout(timeout)
-    }
-  }, [images, fallbackImage, debugLog, onLoaded])
+      }
+    }, 5000) // 5 segundos máximo de espera
+
+    return () => clearTimeout(timeoutId)
+  }, [images, fallbackImage, debugLog, onLoaded, isPreloading])
   
   // Memoizar handlers para eventos de imagen
   const handleImageLoad = useCallback((index: number) => {
-    console.log(`[DEBUG-IMG] Imagen ${index} cargada y renderizada en el DOM`)
-    debugLog(`Imagen ${index} cargada`)
-  }, [debugLog])
+    console.log(`[DEBUG-CAROUSEL] Imagen ${index} cargada con éxito - URL: ${images?.[index] || 'unknown'}`)
+    debugLog(`Imagen del carrusel ${index} cargada con éxito`)
+    // Marcar imagen como cargada
+    setLoadedImages(prev => {
+      const newLoadedImages = [...prev]
+      newLoadedImages[index] = true
+      return newLoadedImages
+    })
+  }, [images, debugLog])
   
   const handleImageError = useCallback((index: number) => {
     console.log(`[DEBUG-IMG] ERROR: Imagen ${index} falló al cargar. Verifique la URL y los permisos.`)
@@ -181,24 +194,17 @@ export function CarouselBackground({
                   </div>
                   
                   <div className="relative w-full h-full overflow-hidden bg-black">
-                    <div className="relative w-full h-full overflow-hidden">
-                      <Image 
-                        src={image} 
-                        alt={`Slide ${index + 1}`}
-                        className="w-full h-full object-cover object-center"
-                        style={{
-                          filter: "brightness(0.7)",
-                        }}
-                        priority={true}
-                        fill={true}
-                        sizes="100vw"
-                        quality={85}
-                        unoptimized={false}
-                        loading="eager"
-                        onLoadingComplete={() => handleImageLoad(index)}
-                        onError={() => handleImageError(index)}
-                      />
-                    </div>
+                    <img 
+                      src={image} 
+                      alt={`Slide ${index + 1}`}
+                      className="w-full h-full object-cover object-center"
+                      style={{
+                        filter: "brightness(0.7)",
+                      }}
+                      loading="eager"
+                      onLoad={() => handleImageLoad(index)}
+                      onError={() => handleImageError(index)}
+                    />
                   </div>
                 </CarouselItem>
               ))
@@ -210,24 +216,17 @@ export function CarouselBackground({
                 </div>
                 
                 <div className="relative w-full h-full overflow-hidden bg-black">
-                  <div className="relative w-full h-full overflow-hidden">
-                    <Image
-                      src={fallbackImage}
-                      alt="Imagen principal"
-                      className="w-full h-full object-cover object-center"
-                      style={{
-                        filter: "brightness(0.7)",
-                      }}
-                      priority={true}
-                      fill={true}
-                      sizes="100vw"
-                      quality={85}
-                      unoptimized={false}
-                      loading="eager"
-                      onLoadingComplete={handleFallbackImageLoad}
-                      onError={handleFallbackImageError}
-                    />
-                  </div>
+                  <img
+                    src={fallbackImage}
+                    alt="Imagen principal"
+                    className="w-full h-full object-cover object-center"
+                    style={{
+                      filter: "brightness(0.7)",
+                    }}
+                    loading="eager"
+                    onLoad={handleFallbackImageLoad}
+                    onError={handleFallbackImageError}
+                  />
                 </div>
               </CarouselItem>
             }
