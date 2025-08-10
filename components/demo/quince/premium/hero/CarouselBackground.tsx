@@ -180,21 +180,25 @@ export function CarouselBackground({
                     Slide {index + 1}
                   </div>
                   
-                  <div className="relative w-full h-full overflow-hidden">
-                    <Image 
-                      src={image} 
-                      alt={`Slide ${index + 1}`}
-                      className="w-full h-full object-cover object-center"
-                      style={{
-                        filter: "brightness(0.7)",
-                      }}
-                      priority={index === 0}
-                      fill={true}
-                      sizes="100vw"
-                      quality={90}
-                      onLoadingComplete={() => handleImageLoad(index)}
-                      onError={() => handleImageError(index)}
-                    />
+                  <div className="relative w-full h-full overflow-hidden bg-black">
+                    <div className="relative w-full h-full overflow-hidden">
+                      <Image 
+                        src={image} 
+                        alt={`Slide ${index + 1}`}
+                        className="w-full h-full object-cover object-center"
+                        style={{
+                          filter: "brightness(0.7)",
+                        }}
+                        priority={true}
+                        fill={true}
+                        sizes="100vw"
+                        quality={85}
+                        unoptimized={false}
+                        loading="eager"
+                        onLoadingComplete={() => handleImageLoad(index)}
+                        onError={() => handleImageError(index)}
+                      />
+                    </div>
                   </div>
                 </CarouselItem>
               ))
@@ -205,21 +209,25 @@ export function CarouselBackground({
                   Fallback Image
                 </div>
                 
-                <div className="relative w-full h-full overflow-hidden">
-                  <Image
-                    src={fallbackImage}
-                    alt="Imagen principal"
-                    className="w-full h-full object-cover object-center"
-                    style={{
-                      filter: "brightness(0.7)",
-                    }}
-                    priority={true}
-                    fill={true}
-                    sizes="100vw"
-                    quality={90}
-                    onLoadingComplete={handleFallbackImageLoad}
-                    onError={handleFallbackImageError}
-                  />
+                <div className="relative w-full h-full overflow-hidden bg-black">
+                  <div className="relative w-full h-full overflow-hidden">
+                    <Image
+                      src={fallbackImage}
+                      alt="Imagen principal"
+                      className="w-full h-full object-cover object-center"
+                      style={{
+                        filter: "brightness(0.7)",
+                      }}
+                      priority={true}
+                      fill={true}
+                      sizes="100vw"
+                      quality={85}
+                      unoptimized={false}
+                      loading="eager"
+                      onLoadingComplete={handleFallbackImageLoad}
+                      onError={handleFallbackImageError}
+                    />
+                  </div>
                 </div>
               </CarouselItem>
             }
