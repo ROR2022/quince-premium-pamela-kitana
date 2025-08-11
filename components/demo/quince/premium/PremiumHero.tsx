@@ -1,11 +1,12 @@
 "use client"
+/* eslint-disable react-hooks/exhaustive-deps */
 
 import { useState, useCallback, useEffect, useRef } from "react"
 import Image from "next/image"
 import { useMusicContext } from "@/context/music-context"
 import { premiumDemoData } from "./data/premium-demo-data"
 import { HeroContent } from "./hero/HeroContent"
-import { CarouselIndicators } from "./hero/HeroControls/CarouselIndicators"
+// Removed unused import: import { CarouselIndicators } from "./hero/HeroControls/CarouselIndicators"
 import { MusicControl } from "./hero/HeroControls/MusicControl"
 import { ScrollIndicator } from "./hero/HeroControls/ScrollIndicator"
 import { PremiumBadge } from "./hero/PremiumBadge"
@@ -113,7 +114,7 @@ export function PremiumHero() {
       debug.debugLog('[PremiumHero] Todas las imágenes cargadas')
       setIsLoaded(true)
     }
-  }, [displayImages, debug.debugLog])
+  }, [displayImages, debug.debugLog, imagesLoaded.size])
 
   // Precarga de la siguiente imagen para mejor rendimiento
   useEffect(() => {

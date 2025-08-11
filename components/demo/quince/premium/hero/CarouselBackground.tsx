@@ -1,4 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, useCallback, useRef } from 'react'
+import Image from 'next/image'
 import {
   Carousel,
   CarouselContent,
@@ -25,7 +27,8 @@ export function CarouselBackground({
   onLoaded,
   debugLog
 }: CarouselBackgroundProps) {
-  const [currentIndex, setCurrentIndex] = useState(0)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [currentIndex, setCurrentIndex] = useState(0) // Keep this as it's used in handlers
   const [isLoading, setIsLoading] = useState(true)
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set())
   const [firstImageLoaded, setFirstImageLoaded] = useState(false)
@@ -72,7 +75,7 @@ export function CarouselBackground({
         setCurrentIndex(newApi.selectedScrollSnap())
       }
     }
-  }, [onApiChange]) // Remove debugLog from dependencies to prevent unnecessary re-renders
+  }, [onApiChange, debugLog]) // Added debugLog to dependency array
   
   // Handler para imagen cargada
   const handleImageLoad = useCallback((imageSrc: string) => {
@@ -120,7 +123,7 @@ export function CarouselBackground({
   // Log de estado
   useEffect(() => {
     debugLog(`[CarouselBackground] Estado - Imágenes: ${totalImages}, Cargadas: ${loadedImages.size}, Cargando: ${isLoading}`)
-  }, [totalImages, loadedImages.size, isLoading]) // Remove debugLog from dependencies
+  }, [totalImages, loadedImages.size, isLoading, debugLog]) // Added debugLog to dependencies
 
   return (
     <div className="w-full h-full relative">
@@ -139,9 +142,12 @@ export function CarouselBackground({
           {displayImages.map((image, index) => (
             <CarouselItem key={`${image}-${index}`} className="h-full">
               <div className="w-full h-full relative">
-                <img
+                <Image
                   src={image}
                   alt={`Imagen de fondo ${index + 1}`}
+                  fill
+                  priority={index === 0}
+                  sizes="100vw"
                   className={`w-full h-full object-cover ${
                     isMobile 
                       ? 'object-[center_30%]' // Centrado más arriba en móviles

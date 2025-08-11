@@ -59,6 +59,22 @@
     --plateado-700: 215 25% 27%;
     --plateado-800: 217 33% 17%;
     --plateado-900: 222 47% 11%;
+    
+    /* Nueva paleta de colores Aurora */
+    --aurora-primary: 11 38% 72%;     /* #dea193 - Rosa durazno principal */
+    --aurora-secondary: 14 21% 57%;   /* #b18075 - Rosa durazno oscuro */
+    --aurora-tertiary: 11 34% 78%;    /* #e4b3a8 - Rosa durazno claro */
+    --aurora-accent: 220 3% 89%;      /* #e3e4e5 - Gris claro para acentos */
+    --aurora-50: 11 70% 96%;
+    --aurora-100: 11 60% 93%;
+    --aurora-200: 11 50% 85%;
+    --aurora-300: 11 45% 77%;
+    --aurora-400: 11 38% 72%;
+    --aurora-500: 11 35% 65%;
+    --aurora-600: 11 30% 55%;
+    --aurora-700: 14 21% 57%;
+    --aurora-800: 14 25% 44%;
+    --aurora-900: 14 30% 36%;
   }
 
   .dark {
@@ -105,6 +121,22 @@
     --plateado-700: 214 32% 91%;
     --plateado-800: 210 40% 96%;
     --plateado-900: 210 40% 98%;
+    
+    /* Nueva paleta de colores Aurora - Modo Oscuro */
+    --aurora-primary: 14 30% 50%;
+    --aurora-secondary: 14 25% 40%;
+    --aurora-tertiary: 14 20% 60%;
+    --aurora-accent: 220 5% 20%;
+    --aurora-50: 14 30% 36%;
+    --aurora-100: 14 25% 44%;
+    --aurora-200: 14 21% 57%;
+    --aurora-300: 11 30% 55%;
+    --aurora-400: 11 35% 65%;
+    --aurora-500: 11 38% 72%;
+    --aurora-600: 11 45% 77%;
+    --aurora-700: 11 50% 85%;
+    --aurora-800: 11 60% 93%;
+    --aurora-900: 11 70% 96%;
   }
 }
 
@@ -396,5 +428,48 @@
   );
   background-size: 200% 100%;
   animation: plateado-shimmer 3s infinite;
+}
+
+/* Nuevas clases CSS para el tema Aurora */
+.aurora-gradient {
+  background: linear-gradient(135deg, #dea193, #b18075, #e4b3a8);
+}
+
+.aurora-text-gradient {
+  background: linear-gradient(135deg, #dea193, #b18075);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.aurora-accent-gradient {
+  background: linear-gradient(135deg, #e4b3a8, #e3e4e5);
+}
+
+.aurora-shadow {
+  box-shadow: 0 4px 14px 0 rgba(222, 161, 147, 0.25);
+}
+
+@keyframes aurora-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.aurora-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(222, 161, 147, 0.4),
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: aurora-shimmer 3s infinite;
+}
+
+/* Fuente específica para el tema Aurora - Princess style */
+@import url('https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&display=swap');
+
+.font-princess {
+  font-family: 'Tangerine', cursive;
 }
 

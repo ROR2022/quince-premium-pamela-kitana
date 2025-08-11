@@ -87,6 +87,23 @@ const config: Config = {
   				'700': '#334155',
   				'800': '#1e293b',
   				'900': '#0f172a'
+  			},
+  			// Nueva paleta de colores para el tema Aurora
+  			aurora: {
+  				'primary': '#dea193',    // Rosa durazno principal
+  				'secondary': '#b18075',  // Rosa durazno oscuro
+  				'tertiary': '#e4b3a8',   // Rosa durazno claro
+  				'accent': '#e3e4e5',     // Gris claro para acentos
+  				'50': '#fdf1ee',
+  				'100': '#fae3de',
+  				'200': '#f4c7bd',
+  				'300': '#eaab9d',
+  				'400': '#dea193',
+  				'500': '#d28778',
+  				'600': '#c06959',
+  				'700': '#b18075',
+  				'800': '#96584a',
+  				'900': '#7c4a3e'
   			}
   		},
   		borderRadius: {

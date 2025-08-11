@@ -1,40 +1,39 @@
-import { PremiumMusicPlayer } from '@/components/demo/quince/premium'
-import { PremiumHero } from '@/components/demo/quince/premium'
-import { PremiumInvitation } from '@/components/demo/quince/premium'
-import { BasicCountdown } from '@/components/demo/quince/basic'
-import { BasicEventDetails } from '@/components/demo/quince/basic'
-import { PremiumGallery } from '@/components/demo/quince/premium'
-import { PremiumPadrinos } from '@/components/demo/quince/premium'
-import { BasicAttendance } from '@/components/demo/quince/basic'
-import { BasicGiftOptions } from '@/components/demo/quince/basic'
-import { PremiumThankYou } from '@/components/demo/quince/premium'
+import { AuroraHero } from "@/components/demo/quince/premium/hero/AuroraHero";
+import { AuroraInvitation } from "@/components/demo/quince/premium/invitation/AuroraInvitation";
+import { AuroraGallery } from "@/components/demo/quince/premium/gallery/AuroraGallery";
+import { AuroraCountdown } from "@/components/demo/quince/premium/countdown/AuroraCountdown";
+import { AuroraAttendance } from "@/components/demo/quince/premium/attendance/AuroraAttendance";
+import { AuroraGifts } from "@/components/demo/quince/premium/gifts/AuroraGifts";
+import { AuroraThankYou } from "@/components/demo/quince/premium/thankyou/AuroraThankYou";
+import { AuroraMusicPlayer } from "@/components/demo/quince/premium/AuroraMusicPlayer";
+import { auroraDemoData } from "@/components/demo/quince/premium/data/aurora-demo-data";
 
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-white">
-      {/* Music Player premium (invisible, maneja el audio) */}
-      <PremiumMusicPlayer />
-      
-      {/* Hero premium con música */}
-      <PremiumHero />
-      
-      {/* Información de padres (premium) */}
-      <PremiumInvitation />
-      
-      {/* Características básicas reutilizadas */}
-      <BasicCountdown />
-      <BasicEventDetails />
-      
-      {/* Características premium exclusivas */}
-      <PremiumGallery />
-      <PremiumPadrinos />
-      
-      {/* Confirmación y regalos (reutilizados del básico) */}
-      <BasicAttendance />
-      <BasicGiftOptions />
-      
-      {/* Mensaje final premium */}
-      <PremiumThankYou />
+      {/* Reproductor de música flotante para tema Aurora */}
+              <AuroraMusicPlayer />
+              
+              {/* Hero Section */}
+              <AuroraHero data={auroraDemoData} />
+              
+              {/* Invitación con tema Aurora */}
+              <AuroraInvitation />
+              
+              {/* Galería con tema Aurora */}
+              <AuroraGallery />
+              
+              {/* Cuenta regresiva con tema Aurora */}
+              <AuroraCountdown />
+              
+              {/* Confirmación de asistencia con tema Aurora */}
+              <AuroraAttendance />
+              
+              {/* Opciones de regalo con tema Aurora */}
+              <AuroraGifts />
+              
+              {/* Agradecimiento con tema Aurora */}
+              <AuroraThankYou />
       
     </div>
   )
