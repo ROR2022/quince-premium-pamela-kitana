@@ -3,16 +3,16 @@
 import { useState, useCallback, useEffect, useRef } from "react"
 import Image from "next/image"
 import { useMusicContext } from "@/context/music-context"
-import { premiumDemoData } from "./data/premium-demo-data"
-import { HeroContent } from "./hero/HeroContent"
-import { CarouselIndicators } from "./hero/HeroControls/CarouselIndicators"
-import { MusicControl } from "./hero/HeroControls/MusicControl"
-import { ScrollIndicator } from "./hero/HeroControls/ScrollIndicator"
-import { PremiumBadge } from "./hero/PremiumBadge"
+import { premiumDemoData } from "../data/premium-demo-data"
+import { HeroContent } from "./HeroContent"
+import { CarouselIndicators } from "./HeroControls/CarouselIndicators"
+import { MusicControl } from "./HeroControls/MusicControl"
+import { ScrollIndicator } from "./HeroControls/ScrollIndicator"
+import { PremiumBadge } from "./PremiumBadge"
 import { useIsMobile } from "@/hooks/use-mobile"
-import { useDebugLog } from "./hooks/useDebugLog"
+import { useDebugLog } from "../hooks/useDebugLog"
 
-export function PremiumHero() {
+export function NewPremiumHero() {
   // Hook para detectar si estamos en móvil
   const isMobile = useIsMobile()
   
@@ -92,7 +92,7 @@ export function PremiumHero() {
   
   // Función para manejar la carga de imágenes
   const handleImageLoad = useCallback((imageSrc: string) => {
-    debug.debugLog(`[PremiumHero] Imagen cargada: ${imageSrc}`)
+    debug.debugLog(`[NewPremiumHero] Imagen cargada: ${imageSrc}`)
     
     // Registrar imagen como cargada
     setImagesLoaded(prev => {
@@ -103,14 +103,14 @@ export function PremiumHero() {
     
     // Si es la primera imagen y aún no se ha marcado como cargada
     if (!firstImageLoadedRef.current && imageSrc === displayImages[0]) {
-      debug.debugLog('[PremiumHero] Primera imagen cargada, mostrando contenido')
+      debug.debugLog('[NewPremiumHero] Primera imagen cargada, mostrando contenido')
       setIsLoaded(true)
       firstImageLoadedRef.current = true
     }
     
     // Si todas las imágenes están cargadas
     if (imagesLoaded.size === displayImages.length - 1) {
-      debug.debugLog('[PremiumHero] Todas las imágenes cargadas')
+      debug.debugLog('[NewPremiumHero] Todas las imágenes cargadas')
       setIsLoaded(true)
     }
   }, [displayImages, debug.debugLog])
@@ -125,7 +125,7 @@ export function PremiumHero() {
       preloadImage.src = displayImages[nextSlideIndex]
     }
     
-    debug.debugLog(`[PremiumHero] Precargando siguiente imagen: ${displayImages[nextSlideIndex]}`)
+    debug.debugLog(`[NewPremiumHero] Precargando siguiente imagen: ${displayImages[nextSlideIndex]}`)
   }, [currentSlide, displayImages, isClient, debug.debugLog])
   
   // Timeout de seguridad para evitar bloqueos de UI
@@ -134,7 +134,7 @@ export function PremiumHero() {
     
     const safetyTimeout = setTimeout(() => {
       if (isTransitioning) {
-        debug.debugLog('[PremiumHero] Safety timeout: resetting isTransitioning')
+        debug.debugLog('[NewPremiumHero] Safety timeout: resetting isTransitioning')
         setIsTransitioning(false)
         isTransitioningRef.current = false
       }
@@ -149,7 +149,7 @@ export function PremiumHero() {
     
     const loadingTimeout = setTimeout(() => {
       if (!isLoaded) {
-        debug.debugLog('[PremiumHero] Timeout de carga alcanzado, forzando finalización')
+        debug.debugLog('[NewPremiumHero] Timeout de carga alcanzado, forzando finalización')
         setIsLoaded(true)
       }
     }, 5000) // 5 segundos máximo de espera

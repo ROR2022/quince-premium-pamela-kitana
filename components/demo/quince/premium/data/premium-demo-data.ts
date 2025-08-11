@@ -14,6 +14,13 @@ export const premiumDemoData = {
       "/images/quince/quince3.jpeg",
       "/images/quince/quince4.jpeg",
     ],
+    // Imágenes optimizadas para móviles (utilizamos las mismas pero se pueden reemplazar por versiones específicas)
+    mobileBackgroundImages: [
+      "/images/quince/quince1.jpeg",
+      "/images/quince/quince2.jpeg",
+      "/images/quince/quince3.jpeg",
+      "/images/quince/quince4.jpeg",
+    ],
     carouselOptions: {
       delay: 5000, // tiempo entre cambios de imagen (5 segundos)
       loop: true,
