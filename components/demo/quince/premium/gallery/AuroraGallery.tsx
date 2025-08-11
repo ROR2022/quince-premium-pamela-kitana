@@ -127,6 +127,11 @@ export function AuroraGallery() {
           <div className="relative h-64 md:h-96 group">
             <div className="w-full h-full flex justify-center">
               <div className="relative w-full max-w-2xl h-full overflow-hidden rounded-xl shadow-xl border-4 border-white">
+                {/* Indicador para hacer clic */}
+                <div className="absolute top-4 right-4 bg-aurora-primary/80 text-white px-3 py-1 rounded-full shadow-md z-10 text-xs backdrop-blur-sm font-medium">
+                  <span>Haz clic para ampliar</span>
+                </div>
+                
                 {images.map((image, index) => (
                   <div
                     key={index}
@@ -148,7 +153,7 @@ export function AuroraGallery() {
                       alt={image.alt}
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      className="object-cover cursor-pointer"
+                      className="object-cover object-top cursor-pointer transition-transform duration-300 group-hover:scale-105"
                     />
                     
                     {/* Caption overlay con estilo Aurora */}
@@ -228,7 +233,9 @@ export function AuroraGallery() {
                 src={images[currentIndex].src || '/placeholder.svg'}
                 alt={images[currentIndex].alt}
                 fill
-                className="object-contain"
+                sizes="100vw"
+                className="object-contain" 
+                priority
               />
               
               {/* Caption en modal con estilo Aurora */}
