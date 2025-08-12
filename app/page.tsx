@@ -1,5 +1,6 @@
 import { AuroraHero } from "@/components/demo/quince/premium/hero/AuroraHero";
 import { AuroraInvitation } from "@/components/demo/quince/premium/invitation/AuroraInvitation";
+import { AuroraEventDetails } from "@/components/demo/quince/premium/eventdetails/AuroraEventDetails";
 import { AuroraGallery } from "@/components/demo/quince/premium/gallery/AuroraGallery";
 import { AuroraCountdown } from "@/components/demo/quince/premium/countdown/AuroraCountdown";
 import { AuroraAttendance } from "@/components/demo/quince/premium/attendance/AuroraAttendance";
@@ -19,6 +20,9 @@ export default function LandingPage() {
               
               {/* Invitación con tema Aurora */}
               <AuroraInvitation />
+              
+              {/* Detalles del evento con tema Aurora */}
+              <AuroraEventDetails />
               
               {/* Galería con tema Aurora */}
               <AuroraGallery />
