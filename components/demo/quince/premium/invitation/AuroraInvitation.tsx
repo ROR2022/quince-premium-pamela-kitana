@@ -2,6 +2,7 @@
 
 import { useRef } from "react"
 import { useInView } from "framer-motion"
+import Image from "next/image"
 import { auroraDemoData } from "../data/aurora-demo-data"
 
 export function AuroraInvitation() {
@@ -9,10 +10,25 @@ export function AuroraInvitation() {
   const isInView = useInView(ref, { once: true, amount: 0.3 })
 
   return (
-    <section className="py-16 px-4 bg-gradient-to-br from-aurora-50 to-aurora-100">
+    <section className="relative py-16 px-4 min-h-screen">
+      {/* Fondo con imagen aurora_2 */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/images/custom/aurora/aurora_15.jpeg"
+          alt="Fondo Invitación Aurora"
+          fill
+          className="object-cover"
+          quality={90}
+          priority
+        />
+        {/* Overlay para legibilidad */}
+        <div className="absolute inset-0 bg-white/75 backdrop-blur-sm"></div>
+      </div>
+
+      {/* Contenido principal */}
       <div
         ref={ref}
-        className={`max-w-3xl mx-auto text-center transition-all duration-1000 ${
+        className={`relative z-10 max-w-3xl mx-auto text-center transition-all duration-1000 ${
           isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
         }`}
       >

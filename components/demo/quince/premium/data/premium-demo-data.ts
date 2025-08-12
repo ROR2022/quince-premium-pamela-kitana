@@ -148,7 +148,7 @@ export const premiumDemoData = {
         question: "¿TIENES UN EVENTO EN PUERTA?",
         action: "DISEÑA CON NOSOTROS TU INVITACIÓN WEB DIGITAL.",
         linkText: "AQUÍ",
-        link: "/"
+        link: "https://www.invitacionesweb.lat/"
       }
     }
   },

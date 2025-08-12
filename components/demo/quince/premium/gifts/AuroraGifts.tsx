@@ -2,6 +2,7 @@
 
 import { useState, useRef } from "react"
 import { useInView } from "framer-motion"
+import Image from "next/image"
 import { auroraDemoData } from "../data/aurora-demo-data"
 
 export function AuroraGifts() {
@@ -36,25 +37,36 @@ export function AuroraGifts() {
   }
 
   return (
-    <section 
-      ref={ref}
-      className="py-16 px-4 relative bg-gradient-to-b from-aurora-accent/5 to-aurora-tertiary/10"
-    >
+    <section className="relative py-16 px-4 min-h-screen">
+      {/* Fondo con imagen aurora_12 */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/images/custom/aurora/aurora_12.jpeg"
+          alt="Fondo Regalos Encantados Aurora"
+          fill
+          className="object-cover"
+          quality={85}
+        />
+        {/* Overlay específico para tarjetas - gradiente elegante */}
+        <div className="absolute inset-0 bg-gradient-to-br from-white/85 via-aurora-50/90 to-white/85 backdrop-blur-[1px]"></div>
+      </div>
+
       {/* Elementos decorativos flotantes */}
-      <div className="absolute top-16 left-10 w-16 h-16 text-aurora-tertiary opacity-20 animate-pulse">
+      <div className="absolute top-16 left-10 w-16 h-16 text-aurora-tertiary opacity-20 animate-pulse z-5">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 2L14 8L20 8L15 12L17 18L12 14L7 18L9 12L4 8L10 8L12 2Z" stroke="currentColor" strokeWidth="1.5" fill="currentColor" fillOpacity="0.3" />
         </svg>
       </div>
       
-      <div className="absolute bottom-16 right-10 w-16 h-16 text-aurora-tertiary opacity-20 animate-pulse" style={{ animationDelay: "1.5s" }}>
+      <div className="absolute bottom-16 right-10 w-16 h-16 text-aurora-tertiary opacity-20 animate-pulse z-5" style={{ animationDelay: "1.5s" }}>
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 2L15 6L19 7L17 11L19 15L15 16L12 20L9 16L5 15L7 11L5 7L9 6L12 2Z" stroke="currentColor" strokeWidth="1.5" fill="currentColor" fillOpacity="0.3" />
         </svg>
       </div>
       
       <div 
-        className={`max-w-4xl mx-auto text-center transition-all duration-1000 ${
+        ref={ref}
+        className={`relative z-10 max-w-4xl mx-auto text-center transition-all duration-1000 ${
           isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
         }`}
       >

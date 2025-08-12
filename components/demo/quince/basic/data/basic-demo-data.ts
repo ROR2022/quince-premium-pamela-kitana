@@ -9,8 +9,8 @@ export const basicDemoData = {
   event: {
     celebrant: "Pamela Kitana Gómez Robles",
     parents: {
-      father: "[PADRE DE PAMELA - Por Confirmar]",
-      mother: "[MADRE DE PAMELA - Por Confirmar]"
+      father: "David Ulister Gómez Villanueva",
+      mother: "Liliana Robles Nicolás"
     },
     date: {
       full: "Sábado 11 de Octubre 2025",
@@ -18,19 +18,19 @@ export const basicDemoData = {
       date: "11 de Octubre 2025"
     },
     ceremony: {
-      time: "[HORA MISA - Por Confirmar]",
-      venue: "[PARROQUIA - Por Confirmar]",
-      address: "[DIRECCIÓN PARROQUIA - Por Confirmar]",
+      time: "7:00 PM",
+      venue: "Parroquia Cristo Rey",
+      address: "Viena y Pino Suárez 7407, Buena Vista, 88120 Nuevo Laredo, Tamps.",
       type: "Misa de Acción de Gracias"
     },
     party: {
-      time: "[HORA RECEPCIÓN - Por Confirmar]",
-      venue: "[SALÓN DE FIESTAS - Por Confirmar]",
-      address: "[DIRECCIÓN SALÓN - Por Confirmar]",
+      time: "8:00 PM",
+      venue: "Salon Melany's",
+      address: "C. Berlín 2021, Unidad Nacional, 88134 Nuevo Laredo, Tamps.",
       type: "Recepción"
     },
-    dressCode: "Formal",
-    restrictions: "No Niños"
+    dressCode: "Formal (Rosa Gold unicamente la quinceañera)",
+    restrictions: ""
   },
 
   countdown: {

@@ -2,6 +2,7 @@
 
 import { useState, useRef } from "react"
 import { useInView } from "framer-motion"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -63,25 +64,36 @@ export function AuroraAttendance() {
   }
 
   return (
-    <section 
-      className="py-16 px-4 relative bg-gradient-to-b from-aurora-accent/10 to-aurora-secondary/5"
-      ref={ref}
-    >
+    <section className="relative py-16 px-4 min-h-screen">
+      {/* Fondo con imagen aurora_10 */}
+      <div className="absolute inset-0 z-0 opacity-50">
+        <Image
+          src="/images/custom/aurora/aurora_10.jpeg"
+          alt="Fondo Confirmación Aurora"
+          fill
+          className="object-cover"
+          quality={85}
+        />
+        {/* Overlay específico para formulario - mayor opacidad */}
+        <div className="absolute inset-0 bg-white/88 backdrop-blur-sm"></div>
+      </div>
+
       {/* Elementos decorativos flotantes */}
-      <div className="absolute top-10 left-10 w-16 h-16 opacity-20 text-aurora-tertiary">
+      <div className="absolute top-10 left-10 w-16 h-16 opacity-20 text-aurora-tertiary z-5">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 2L15 6L19 7L17 11L19 15L15 16L12 20L9 16L5 15L7 11L5 7L9 6L12 2Z" stroke="currentColor" strokeWidth="1.5" fill="currentColor" fillOpacity="0.3" />
         </svg>
       </div>
       
-      <div className="absolute bottom-10 right-10 w-12 h-12 opacity-20 text-aurora-tertiary">
+      <div className="absolute bottom-10 right-10 w-12 h-12 opacity-20 text-aurora-tertiary z-5">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 2L14 8L20 8L15 12L17 18L12 14L7 18L9 12L4 8L10 8L12 2Z" stroke="currentColor" strokeWidth="1.5" fill="currentColor" fillOpacity="0.3" />
         </svg>
       </div>
       
       <div 
-        className={`max-w-2xl mx-auto transition-all duration-1000 ${
+        ref={ref}
+        className={`relative z-10 max-w-2xl mx-auto transition-all duration-1000 ${
           isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
         }`}
       >
@@ -120,8 +132,8 @@ export function AuroraAttendance() {
             <div className="h-px w-16 bg-gradient-to-r from-transparent via-aurora-tertiary to-transparent"></div>
           </div>
           
-          <p className="text-aurora-secondary mt-4 italic text-sm">
-            {auroraDemoData.attendance?.message || "Respetuosamente <No Niños>"}
+          <p className="text-aurora-secondary mt-4 italic text-xl">
+            {auroraDemoData.attendance?.message || "Rosa Gold solo la Quinceañera"}
           </p>
           <p className="text-gray-600 mt-2">
             {auroraDemoData.attendance?.subtitle || "Espero que no sea impedimento para que ustedes puedan asistir a mi fiesta."}

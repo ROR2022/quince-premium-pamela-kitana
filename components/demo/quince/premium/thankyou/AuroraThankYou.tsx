@@ -4,6 +4,7 @@ import { useRef } from "react"
 import { useInView } from "framer-motion"
 import Image from "next/image"
 import { auroraDemoData } from "../data/aurora-demo-data"
+import { premiumDemoData } from "../data/premium-demo-data";
 
 export function AuroraThankYou() {
   const ref = useRef<HTMLDivElement>(null)
@@ -15,29 +16,43 @@ export function AuroraThankYou() {
   return (
     <section 
       ref={ref}
-      className="py-20 px-4 relative overflow-hidden bg-gradient-to-b from-aurora-secondary/5 to-aurora-primary/10"
+      className="py-20 px-4 relative overflow-hidden"
     >
+      {/* Imagen de fondo */}
+      <Image
+        src="/images/custom/aurora/aurora_14.jpeg"
+        alt="Aurora Background"
+        fill
+        style={{ objectFit: "cover" }}
+        quality={90}
+        priority={false}
+        className="z-0"
+      />
+      
+      {/* Overlay para legibilidad */}
+      <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-aurora-50/85 to-white/80 backdrop-blur-sm z-5"></div>
+      
       {/* Elementos decorativos flotantes */}
-      <div className="absolute top-20 left-[15%] w-8 h-8 text-aurora-tertiary opacity-20 animate-pulse">
+      <div className="absolute top-20 left-[15%] w-8 h-8 text-aurora-tertiary opacity-20 animate-pulse z-5">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 2L14 8L20 8L15 12L17 18L12 14L7 18L9 12L4 8L10 8L12 2Z" stroke="currentColor" strokeWidth="1.5" fill="currentColor" fillOpacity="0.3" />
         </svg>
       </div>
       
-      <div className="absolute top-40 right-[20%] w-12 h-12 text-aurora-tertiary opacity-20 animate-pulse" style={{ animationDelay: "1s" }}>
+      <div className="absolute top-40 right-[20%] w-12 h-12 text-aurora-tertiary opacity-20 animate-pulse z-5" style={{ animationDelay: "1s" }}>
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 2L15 6L19 7L17 11L19 15L15 16L12 20L9 16L5 15L7 11L5 7L9 6L12 2Z" stroke="currentColor" strokeWidth="1.5" fill="currentColor" fillOpacity="0.3" />
         </svg>
       </div>
       
-      <div className="absolute bottom-20 left-[30%] w-10 h-10 text-aurora-tertiary opacity-20 animate-pulse" style={{ animationDelay: "2s" }}>
+      <div className="absolute bottom-20 left-[30%] w-10 h-10 text-aurora-tertiary opacity-20 animate-pulse z-5" style={{ animationDelay: "2s" }}>
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 2L14 8L20 8L15 12L17 18L12 14L7 18L9 12L4 8L10 8L12 2Z" stroke="currentColor" strokeWidth="1.5" fill="currentColor" fillOpacity="0.3" />
         </svg>
       </div>
       
       <div 
-        className={`max-w-3xl mx-auto text-center transition-all duration-1000 ${
+        className={`max-w-3xl mx-auto text-center transition-all duration-1000 relative z-10 ${
           isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
         }`}
       >
@@ -122,10 +137,84 @@ export function AuroraThankYou() {
             </div>
           </div>
         </div>
+
+        {/* CTA Aurora Elegante */}
+        <div className="relative mb-8 group">
+          {/* Marco principal con glassmorphism */}
+          <div className="bg-white/70 backdrop-blur-md rounded-2xl p-8 border-2 border-aurora-tertiary/40 shadow-2xl relative overflow-hidden">
+            {/* Efecto shimmer de fondo */}
+            <div className="absolute inset-0 aurora-shimmer opacity-30"></div>
+            
+            {/* Decoraciones en las esquinas */}
+            <div className="absolute top-3 left-3 w-6 h-6 text-aurora-tertiary/50">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L15 6L19 7L17 11L19 15L15 16L12 20L9 16L5 15L7 11L5 7L9 6L12 2Z" stroke="currentColor" strokeWidth="1.5" fill="currentColor" fillOpacity="0.3" />
+              </svg>
+            </div>
+            <div className="absolute top-3 right-3 w-6 h-6 text-aurora-tertiary/50">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L14 8L20 8L15 12L17 18L12 14L7 18L9 12L4 8L10 8L12 2Z" stroke="currentColor" strokeWidth="1.5" fill="currentColor" fillOpacity="0.3" />
+              </svg>
+            </div>
+            
+            {/* Contenido del CTA */}
+            <div className="relative z-10 text-center">
+              {/* Corona decorativa */}
+              <div className="mx-auto w-12 h-12 mb-4 text-aurora-tertiary">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2L15 6L19 7L17 11L19 15L15 16L12 20L9 16L5 15L7 11L5 7L9 6L12 2Z" stroke="currentColor" strokeWidth="2" fill="currentColor" fillOpacity="0.2" />
+                </svg>
+              </div>
+              
+              <h3 className="font-princess aurora-text-gradient text-2xl md:text-3xl font-bold mb-3">
+                {premiumDemoData.thankYou.footer.cta.question}
+              </h3>
+              
+              {/* Separador decorativo */}
+              <div className="flex items-center justify-center my-4">
+                <div className="h-px w-12 bg-gradient-to-r from-transparent via-aurora-tertiary to-transparent"></div>
+                <div className="mx-3 text-aurora-tertiary text-xs">✧</div>
+                <div className="h-px w-12 bg-gradient-to-r from-transparent via-aurora-tertiary to-transparent"></div>
+              </div>
+              
+              <p className="text-aurora-secondary text-base mb-6 leading-relaxed max-w-md mx-auto">
+                {premiumDemoData.thankYou.footer.cta.action}
+              </p>
+              
+              {/* Botón Aurora mágico */}
+              <a
+                href={premiumDemoData.thankYou.footer.cta.link}
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-aurora-primary via-aurora-secondary to-aurora-tertiary 
+                         text-white px-8 py-4 rounded-full font-semibold text-lg
+                         hover:shadow-xl hover:shadow-aurora-tertiary/30 
+                         transform hover:scale-105 transition-all duration-300
+                         border border-aurora-tertiary/20 relative overflow-hidden group"
+              >
+                {/* Efecto brillante al hover */}
+                <div className="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                
+                {/* Icono de estrella */}
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2L14 8L20 8L15 12L17 18L12 14L7 18L9 12L4 8L10 8L12 2Z" fill="currentColor" />
+                </svg>
+                
+                <span className="relative z-10">{premiumDemoData.thankYou.footer.cta.linkText}</span>
+                
+                {/* Icono de flecha */}
+                <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5 12h14m-7-7l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          
+          {/* Efecto de brillo exterior */}
+          <div className="absolute inset-0 bg-gradient-to-r from-aurora-primary/20 via-aurora-secondary/20 to-aurora-tertiary/20 rounded-2xl blur-xl -z-10 opacity-60 group-hover:opacity-80 transition-opacity duration-300"></div>
+        </div>
         
         {/* Nota de tema */}
         <div className="mt-8 p-3 bg-aurora-50/10 backdrop-blur-sm rounded-lg border border-aurora-tertiary/20 max-w-md mx-auto">
-          <p className="text-xs text-aurora-50">
+          <p className="text-xs text-aurora-secondary">
             👑 <strong>Tema Aurora:</strong> Agradecimiento con diseño de cuento de hadas y elementos elegantes inspirados en la princesa Aurora.
           </p>
         </div>

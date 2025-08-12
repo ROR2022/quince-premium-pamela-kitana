@@ -7,28 +7,85 @@ import Image from 'next/image'
 import { useIsClient } from "@/hooks/useIsClient"
 import { auroraDemoData } from "../data/aurora-demo-data"
 
+// Tipos para TypeScript
+interface GalleryImage {
+  src: string
+  alt: string
+  caption: string
+  category?: string
+}
+
+interface CategoryData {
+  title: string
+  icon: string
+  description: string
+  images: GalleryImage[]
+}
+
+interface Categories {
+  [key: string]: CategoryData
+}
+
 export function AuroraGallery() {
-  const [currentIndex, setCurrentIndex] = useState(0)
+  // Estados para manejo de categorías
+  const [activeCategory, setActiveCategory] = useState<string>("Quinceañera")
+  const [categoryIndexes, setCategoryIndexes] = useState<Record<string, number>>({
+    "Quinceañera": 0,
+    "Familia": 0,
+    "Chambelanes": 0
+  })
+  const [isTransitioning, setIsTransitioning] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, amount: 0.3 })
   const isClient = useIsClient()
 
-  const images = auroraDemoData.gallery.images
+  // Obtener categorías y datos
+  const categories = auroraDemoData.gallery.categories as Categories
+
+  // Funciones helper para manejo de categorías
+  const getCurrentImages = useCallback((): GalleryImage[] => {
+    return categories[activeCategory]?.images || []
+  }, [categories, activeCategory])
+
+  const getCurrentIndex = useCallback((): number => {
+    return categoryIndexes[activeCategory] || 0
+  }, [categoryIndexes, activeCategory])
+
+  const setCurrentIndex = useCallback((index: number) => {
+    setCategoryIndexes(prev => ({
+      ...prev,
+      [activeCategory]: index
+    }))
+  }, [activeCategory, setCategoryIndexes])
+
+  const switchCategory = useCallback((category: string) => {
+    if (category !== activeCategory && categories[category]) {
+      setIsTransitioning(true)
+      setTimeout(() => {
+        setActiveCategory(category)
+        setIsTransitioning(false)
+      }, 150)
+    }
+  }, [activeCategory, categories, setIsTransitioning, setActiveCategory])
+
+  // Variables derivadas
+  const images = getCurrentImages()
+  const currentIndex = getCurrentIndex()
 
   const goToPrevious = useCallback(() => {
     if (!isClient) return
     const isFirstSlide = currentIndex === 0
     const newIndex = isFirstSlide ? images.length - 1 : currentIndex - 1
     setCurrentIndex(newIndex)
-  }, [currentIndex, isClient, images.length])
+  }, [currentIndex, isClient, images.length, setCurrentIndex])
 
   const goToNext = useCallback(() => {
     if (!isClient) return
     const isLastSlide = currentIndex === images.length - 1
     const newIndex = isLastSlide ? 0 : currentIndex + 1
     setCurrentIndex(newIndex)
-  }, [currentIndex, isClient, images.length])
+  }, [currentIndex, isClient, images.length, setCurrentIndex])
 
   const goToSlide = (slideIndex: number) => {
     if (!isClient) return
@@ -67,10 +124,24 @@ export function AuroraGallery() {
   }, [currentIndex, isModalOpen, goToNext, goToPrevious, closeModal, isClient])
 
   return (
-    <section className="py-16 px-4 bg-gradient-to-br from-aurora-50 to-aurora-100">
+    <section className="relative py-16 px-4 min-h-screen">
+      {/* Fondo con imagen aurora_9 */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/images/custom/aurora/aurora_9.jpeg"
+          alt="Fondo Galería Aurora"
+          fill
+          className="object-cover"
+          quality={85}
+        />
+        {/* Overlay específico para galería - más transparente */}
+        <div className="absolute inset-0 bg-gradient-to-br from-aurora-50/80 via-white/85 to-aurora-100/80 backdrop-blur-[0.5px]"></div>
+      </div>
+
+      {/* Contenido principal */}
       <div
         ref={ref}
-        className={`max-w-4xl mx-auto text-center transition-all duration-1000 ${
+        className={`relative z-10 max-w-4xl mx-auto text-center transition-all duration-1000 ${
           isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}
       >
@@ -115,6 +186,68 @@ export function AuroraGallery() {
           <div className="w-12 h-px bg-gradient-to-r from-aurora-primary to-aurora-tertiary"></div>
         </div>
 
+        {/* Filtros de Categorías */}
+        <div className="mt-8 mb-6">
+          <div className="flex flex-wrap justify-center gap-3 md:gap-4">
+            {Object.entries(categories).map(([categoryKey, categoryData]: [string, CategoryData]) => {
+              const isActive = activeCategory === categoryKey
+              const imageCount = categoryData.images?.length || 0
+              
+              return (
+                <button
+                  key={categoryKey}
+                  onClick={() => switchCategory(categoryKey)}
+                  disabled={isTransitioning}
+                  className={`
+                    group relative px-4 py-3 rounded-xl font-medium text-sm md:text-base
+                    transition-all duration-300 ease-out transform hover:scale-105
+                    border-2 backdrop-blur-sm
+                    ${isActive 
+                      ? 'bg-aurora-primary text-white border-aurora-primary shadow-lg shadow-aurora-primary/30' 
+                      : 'bg-white/70 text-aurora-700 border-aurora-tertiary/50 hover:bg-aurora-primary/10 hover:border-aurora-primary/60'
+                    }
+                    ${isTransitioning ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
+                  `}
+                >
+                  {/* Icono y texto */}
+                  <div className="flex items-center gap-2">
+                    <span className="text-lg">{categoryData.icon}</span>
+                    <span className="font-princess">{categoryData.title}</span>
+                    <span className={`
+                      text-xs px-2 py-1 rounded-full
+                      ${isActive 
+                        ? 'bg-white/20 text-white' 
+                        : 'bg-aurora-primary/10 text-aurora-primary group-hover:bg-aurora-primary/20'
+                      }
+                    `}>
+                      {imageCount}
+                    </span>
+                  </div>
+                  
+                  {/* Efecto shimmer para categoría activa */}
+                  {isActive && (
+                    <div className="absolute inset-0 aurora-shimmer rounded-xl opacity-30"></div>
+                  )}
+                  
+                  {/* Indicador de transición */}
+                  {isTransitioning && isActive && (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    </div>
+                  )}
+                </button>
+              )
+            })}
+          </div>
+          
+          {/* Descripción de categoría activa */}
+          <div className="mt-4 text-center">
+            <p className="text-aurora-600 text-sm md:text-base italic">
+              {categories[activeCategory]?.description}
+            </p>
+          </div>
+        </div>
+
         {/* Marco decorativo de galería estilo Aurora */}
         <div className="relative mt-8 border-4 border-aurora-tertiary/30 p-4 rounded-xl bg-white/50 backdrop-blur-sm">
           {/* Decoraciones esquinas - estilo castillo/cuento de hadas */}
@@ -132,7 +265,7 @@ export function AuroraGallery() {
                   <span>Haz clic para ampliar</span>
                 </div>
                 
-                {images.map((image, index) => (
+                {images.map((image: GalleryImage, index: number) => (
                   <div
                     key={index}
                     className={`absolute top-0 left-0 w-full h-full transition-opacity duration-500 ${
@@ -188,10 +321,28 @@ export function AuroraGallery() {
               </>
             )}
 
+            {/* Contador de categoría y posición */}
+            {isClient && (
+              <div className="absolute -bottom-16 left-0 right-0 flex justify-center">
+                <div className="bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-md border border-aurora-tertiary/30">
+                  <div className="flex items-center gap-2 text-sm">
+                    <span className="text-lg">{categories[activeCategory]?.icon}</span>
+                    <span className="font-medium text-aurora-700">
+                      {categories[activeCategory]?.title}
+                    </span>
+                    <span className="text-aurora-500">•</span>
+                    <span className="text-aurora-600">
+                      {currentIndex + 1} de {images.length}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {/* Indicators - solo mostrar en cliente */}
             {isClient && (
               <div className="absolute -bottom-10 left-0 right-0 flex justify-center gap-2">
-                {images.map((_, index) => (
+                {images.map((_: GalleryImage, index: number) => (
                   <button
                     key={index}
                     onClick={() => goToSlide(index)}
@@ -262,7 +413,7 @@ export function AuroraGallery() {
             </button>
 
             <div className="absolute bottom-20 left-1/2 -translate-x-1/2 flex gap-2">
-              {images.map((_, index) => (
+              {images.map((_: GalleryImage, index: number) => (
                 <button
                   key={index}
                   onClick={() => goToSlide(index)}

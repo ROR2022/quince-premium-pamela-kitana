@@ -11,17 +11,17 @@ export const auroraDemoData = {
     name: "Pamela Kitana",
     subtitle: "¡Mis XV años!",
     backgroundImages: [
-      "/images/custom/princesaAurora1.jpg",
-      "/images/custom/Aurora2.webp",
-      "/images/custom/Aurora3.webp",
-      "/images/custom/aurora4.jpg",
+      "/images/custom/aurora/aurora_1.jpeg",
+      "/images/custom/aurora/aurora_3.jpeg",
+      "/images/custom/aurora/aurora_5.jpeg",
+      "/images/custom/aurora/aurora_7.jpeg",
     ],
-    // Imágenes optimizadas para móviles (usando las mismas por ahora)
+    // Imágenes optimizadas para móviles (usando las mismas)
     mobileBackgroundImages: [
-      "/images/custom/princesaAurora1.jpg",
-      "/images/custom/Aurora2.webp",
-      "/images/custom/Aurora3.webp",
-      "/images/custom/aurora4.jpg",
+      "/images/custom/aurora/aurora_1.jpeg",
+      "/images/custom/aurora/aurora_3.jpeg",
+      "/images/custom/aurora/aurora_5.jpeg",
+      "/images/custom/aurora/aurora_7.jpeg",
     ],
     carouselOptions: {
       delay: 5000, // tiempo entre cambios de imagen (5 segundos)
@@ -72,38 +72,203 @@ export const auroraDemoData = {
     decorativeMessage: "En este cuento de hadas que comienza"
   },
   
-  // Galería de fotos (tema Aurora)
+  // Galería de fotos categorizada (tema Aurora)
   gallery: {
-    ...premiumDemoData.gallery,
     title: "Álbum Real",
     subtitle: "Momentos mágicos de Pamela Kitana",
     description: "Una colección de recuerdos dignos de un cuento de hadas",
-    images: [
-      { 
-        src: "/images/custom/princesaAurora1.jpg", 
-        alt: "Pamela Kitana - Sesión Aurora 1", 
-        caption: "Como una verdadera princesa",
-        category: "princesa"
+    defaultCategory: "Quinceañera",
+    categories: {
+      "Quinceañera": {
+        title: "La Protagonista",
+        description: "Los momentos más especiales de nuestra princesa",
+        icon: "👑",
+        images: [
+          {
+            src: "/images/custom/quinceañera/pamela_1.jpg",
+            alt: "Pamela Kitana - Momento especial 1",
+            caption: "Como una verdadera princesa",
+            category: "Quinceañera"
+          },
+          {
+            src: "/images/custom/quinceañera/pamela_2.jpg",
+            alt: "Pamela Kitana - Momento especial 2", 
+            caption: "Elegancia y gracia real",
+            category: "Quinceañera"
+          },
+          {
+            src: "/images/custom/quinceañera/pamela_3.jpg",
+            alt: "Pamela Kitana - Momento especial 3",
+            caption: "Un sueño hecho realidad",
+            category: "Quinceañera"
+          },
+          {
+            src: "/images/custom/quinceañera/pamela_4.jpg",
+            alt: "Pamela Kitana - Momento especial 4",
+            caption: "La magia de ser princesa",
+            category: "Quinceañera"
+          },
+          {
+            src: "/images/custom/quinceañera/pamela_5.jpg",
+            alt: "Pamela Kitana - Momento especial 5",
+            caption: "Momentos únicos e irrepetibles",
+            category: "Quinceañera"
+          },
+          {
+            src: "/images/custom/quinceañera/pamela_7.jpg",
+            alt: "Pamela Kitana - Momento especial 7",
+            caption: "Belleza que deslumbra",
+            category: "Quinceañera"
+          },
+          {
+            src: "/images/custom/quinceañera/pamela_8.jpg",
+            alt: "Pamela Kitana - Momento especial 8",
+            caption: "La quinceañera más hermosa",
+            category: "Quinceañera"
+          },
+          {
+            src: "/images/custom/quinceañera/pamela_9.jpg",
+            alt: "Pamela Kitana - Momento especial 9",
+            caption: "Recuerdos para toda la vida",
+            category: "Quinceañera"
+          },
+          {
+            src: "/images/custom/quinceañera/pamela_10.jpg",
+            alt: "Pamela Kitana - Momento especial 10",
+            caption: "Sonrisa que ilumina el día",
+            category: "Quinceañera"
+          },
+          {
+            src: "/images/custom/quinceañera/pamela_11.jpg",
+            alt: "Pamela Kitana - Momento especial 11",
+            caption: "Un día para recordar siempre",
+            category: "Quinceañera"
+          },
+          {
+            src: "/images/custom/quinceañera/pamela_12.jpg",
+            alt: "Pamela Kitana - Momento especial 12",
+            caption: "La protagonista del cuento",
+            category: "Quinceañera"
+          },
+          {
+            src: "/images/custom/quinceañera/pamela_13.jpg",
+            alt: "Pamela Kitana - Momento especial 13",
+            caption: "Dulzura y elegancia",
+            category: "Quinceañera"
+          },
+          {
+            src: "/images/custom/quinceañera/pamela_14.jpg",
+            alt: "Pamela Kitana - Momento especial 14",
+            caption: "Momentos mágicos capturados",
+            category: "Quinceañera"
+          },
+          {
+            src: "/images/custom/quinceañera/pamela_15.jpg",
+            alt: "Pamela Kitana - Momento especial 15",
+            caption: "La quinceañera soñada",
+            category: "Quinceañera"
+          },
+          {
+            src: "/images/custom/quinceañera/pamela_16.jpg",
+            alt: "Pamela Kitana - Momento especial 16",
+            caption: "Belleza natural y radiante",
+            category: "Quinceañera"
+          },
+          {
+            src: "/images/custom/quinceañera/pamela_17.jpg",
+            alt: "Pamela Kitana - Momento especial 17",
+            caption: "Un día perfecto para una princesa",
+            category: "Quinceañera"
+          },
+          {
+            src: "/images/custom/quinceañera/pamela_18.jpg",
+            alt: "Pamela Kitana - Momento especial 18",
+            caption: "El brillo de una estrella",
+            category: "Quinceañera"
+          }
+        ]
       },
-      { 
-        src: "/images/custom/Aurora2.webp", 
-        alt: "Pamela Kitana - Sesión Aurora 2", 
-        caption: "Momentos mágicos",
-        category: "magia"
+      "Familia": {
+        title: "Seres Queridos",
+        description: "Los pilares que hacen este día especial",
+        icon: "👨‍👩‍👧‍👦",
+        images: [
+          {
+            src: "/images/custom/familia/padres.jpg",
+            alt: "Padres de Pamela Kitana",
+            caption: "Los padres amorosos que la guiaron hasta aquí",
+            category: "Familia"
+          },
+          {
+            src: "/images/custom/familia/abuelos_paternos.jpg",
+            alt: "Abuelos paternos de Pamela",
+            caption: "Los abuelos paternos, pilares de sabiduría",
+            category: "Familia"
+          },
+          {
+            src: "/images/custom/familia/abuelos_maternos.jpg",
+            alt: "Abuelos maternos de Pamela",
+            caption: "Los abuelos maternos, llenos de amor",
+            category: "Familia"
+          },
+          {
+            src: "/images/custom/familia/hermana_davne.jpg",
+            alt: "Hermana Davne",
+            caption: "Davne, la hermana cómplice y amiga",
+            category: "Familia"
+          },
+          {
+            src: "/images/custom/familia/hermana_raiza.jpg",
+            alt: "Hermana Raiza",
+            caption: "Raiza, la hermana querida del corazón",
+            category: "Familia"
+          },
+          {
+            src: "/images/custom/familia/padrinos_velacion.jpg",
+            alt: "Padrinos de velación",
+            caption: "Los padrinos especiales de esta celebración",
+            category: "Familia"
+          }
+        ]
       },
-      { 
-        src: "/images/custom/Aurora3.webp", 
-        alt: "Pamela Kitana - Sesión Aurora 3", 
-        caption: "Un sueño hecho realidad",
-        category: "sueno"
-      },
-      { 
-        src: "/images/custom/aurora4.jpg", 
-        alt: "Pamela Kitana - Sesión Aurora 4", 
-        caption: "La princesa del cuento",
-        category: "princesa"
+      "Chambelanes": {
+        title: "Caballeros de Honor",
+        description: "Los guardianes de nuestra princesa",
+        icon: "🤵",
+        images: [
+          {
+            src: "/images/custom/chambelanes/hermano_cristian.jpg",
+            alt: "Hermano Cristian",
+            caption: "Cristian, el hermano protector y querido",
+            category: "Chambelanes"
+          },
+          {
+            src: "/images/custom/chambelanes/primo_aaron.jpg",
+            alt: "Primo Aaron",
+            caption: "Aaron, el primo que siempre está presente",
+            category: "Chambelanes"
+          },
+          {
+            src: "/images/custom/chambelanes/primo_edson.jpg",
+            alt: "Primo Edson",
+            caption: "Edson, el primo de confianza",
+            category: "Chambelanes"
+          },
+          {
+            src: "/images/custom/chambelanes/primo_jonathan.jpg",
+            alt: "Primo Jonathan",
+            caption: "Jonathan, el primo del alma",
+            category: "Chambelanes"
+          },
+          {
+            src: "/images/custom/chambelanes/angel_jahir.jpg",
+            alt: "Angel Jahir",
+            caption: "Angel Jahir, el caballero de honor especial",
+            category: "Chambelanes"
+          }
+        ]
       }
-    ]
+    }
   },
   
   // Cuenta regresiva (tema Aurora)
@@ -117,7 +282,7 @@ export const auroraDemoData = {
   // Confirmación de asistencia (tema Aurora)
   attendance: {
     title: "Tu Presencia es Importante",
-    message: "Respetuosamente <No Niños>",
+    message: "Codigo de Vestimenta Formal (Rosa Gold solo la Quinceañera)",
     subtitle: "Espero que puedas acompañarme en este día tan especial de mi vida",
     fields: {
       name: "Tu nombre completo",
