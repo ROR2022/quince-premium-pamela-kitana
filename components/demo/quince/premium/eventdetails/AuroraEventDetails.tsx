@@ -173,7 +173,6 @@ export function AuroraEventDetails() {
           <div
             data-testid="ceremony-section"
             className="bg-white/98 backdrop-blur-lg rounded-2xl p-10 border-2 border-aurora-primary/50 shadow-2xl ring-2 ring-aurora-primary/30 hover:shadow-2xl transition-all duration-300 relative overflow-hidden group"
-            style={{ position: "static", zIndex: "auto", pointerEvents: "auto" }}
           >
             <div className="absolute inset-0 aurora-shimmer opacity-20 group-hover:opacity-30 transition-opacity duration-300"></div>
 
@@ -215,9 +214,10 @@ export function AuroraEventDetails() {
 
             <Button
               variant="outline"
-              className="w-full mt-6 border-2 border-aurora-primary text-aurora-primary hover:bg-aurora-primary hover:text-white hover:shadow-xl transition-all duration-300 font-semibold bg-transparent"
-              style={{ cursor: "pointer" }}
-              onClick={() => {
+              className="w-full mt-6 border-2 border-aurora-primary text-aurora-primary hover:bg-aurora-primary hover:text-white hover:shadow-xl transition-all duration-300 font-semibold bg-white/90 relative z-20"
+              onClick={(e) => {
+                e.preventDefault()
+                e.stopPropagation()
                 openInMaps(auroraDemoData.event.ceremony.address, "Ceremonia - " + auroraDemoData.event.ceremony.venue)
               }}
             >
@@ -231,7 +231,6 @@ export function AuroraEventDetails() {
           <div
             data-testid="party-section"
             className="bg-white/98 backdrop-blur-lg rounded-2xl p-10 border-2 border-aurora-primary/50 shadow-2xl ring-2 ring-aurora-primary/30 hover:shadow-2xl transition-all duration-300 relative overflow-hidden group"
-            style={{ position: "static", zIndex: "auto", pointerEvents: "auto" }}
           >
             <div className="absolute inset-0 aurora-shimmer opacity-20 group-hover:opacity-30 transition-opacity duration-300"></div>
 
@@ -273,9 +272,10 @@ export function AuroraEventDetails() {
 
             <Button
               variant="outline"
-              className="w-full mt-6 border-2 border-aurora-primary text-aurora-primary hover:bg-aurora-primary hover:text-white hover:shadow-xl transition-all duration-300 font-semibold bg-transparent"
-              style={{ cursor: "pointer" }}
-              onClick={() => {
+              className="w-full mt-6 border-2 border-aurora-primary text-aurora-primary hover:bg-aurora-primary hover:text-white hover:shadow-xl transition-all duration-300 font-semibold bg-white/90 relative z-20"
+              onClick={(e) => {
+                e.preventDefault()
+                e.stopPropagation()
                 openInMaps(auroraDemoData.event.party.address, "Recepción - " + auroraDemoData.event.party.venue)
               }}
             >
