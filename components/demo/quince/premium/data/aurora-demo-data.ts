@@ -329,7 +329,7 @@ export const auroraDemoData = {
         icon: "💎",
         title: "Tesoro Real",
         description: "Transferencia Bancaria",
-        details: "BBVA\nTitular: Familia Gómez Robles\nCuenta: XXXX-XXXX-XXXX-XXXX"
+        details: "Bancoppel\nTitular: David Ulister Gómez Villanueva\nCuenta: 4169-1608-4236-4219"
       },
       {
         icon: "✨",
