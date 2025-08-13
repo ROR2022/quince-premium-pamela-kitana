@@ -32,28 +32,28 @@ export function AuroraInvitation() {
           isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
         }`}
       >
-        {/* Badge premium con estilo Aurora - FASE 2: Intensificado para mayor impacto */}
-        <div className="inline-block bg-gradient-to-r from-aurora-primary via-aurora-secondary to-aurora-tertiary text-white px-6 py-3 rounded-full text-sm font-semibold mb-8 shadow-xl border-2 border-aurora-primary/60 aurora-shadow ring-2 ring-aurora-primary/30">
+        {/* Badge premium con estilo Aurora - FASE 1: Aurora Vibrante morado-fucsia */}
+        <div className="inline-block bg-gradient-to-r from-fuchsia-600 via-purple-500 to-fuchsia-500 text-white px-7 py-4 rounded-full text-base font-bold mb-8 shadow-lg border-2 border-purple-500 ring-2 ring-purple-400/40">
           👑 Invitación Real Aurora
         </div>
 
         {/* Marco decorativo estilo Aurora */}
-          <div className="relative p-8 border-6 border-aurora-primary/50 rounded-2xl bg-white/95 backdrop-blur-md shadow-2xl ring-2 ring-aurora-primary/30">
+          <div className="relative p-8 border-6 border-purple-600 rounded-2xl bg-white/95 backdrop-blur-md shadow-2xl ring-2 ring-fuchsia-400/30">
           {/* Decoraciones esquinas - estilo castillo/cuento de hadas */}
-            <div className="absolute top-0 left-0 w-10 h-10 border-t-6 border-l-6 border-aurora-primary shadow-[0_0_8px_2px_rgba(255,180,255,0.5)] -translate-x-3 -translate-y-3"></div>
-            <div className="absolute top-0 right-0 w-10 h-10 border-t-6 border-r-6 border-aurora-primary shadow-[0_0_8px_2px_rgba(255,180,255,0.5)] translate-x-3 -translate-y-3"></div>
-            <div className="absolute bottom-0 left-0 w-10 h-10 border-b-6 border-l-6 border-aurora-primary shadow-[0_0_8px_2px_rgba(255,180,255,0.5)] -translate-x-3 translate-y-3"></div>
-            <div className="absolute bottom-0 right-0 w-10 h-10 border-b-6 border-r-6 border-aurora-primary shadow-[0_0_8px_2px_rgba(255,180,255,0.5)] translate-x-3 translate-y-3"></div>
+            <div className="absolute top-0 left-0 w-10 h-10 border-t-6 border-l-6 border-fuchsia-500 shadow-[0_0_8px_2px_rgba(128,0,128,0.5)] -translate-x-3 -translate-y-3"></div>
+            <div className="absolute top-0 right-0 w-10 h-10 border-t-6 border-r-6 border-fuchsia-500 shadow-[0_0_8px_2px_rgba(128,0,128,0.5)] translate-x-3 -translate-y-3"></div>
+            <div className="absolute bottom-0 left-0 w-10 h-10 border-b-6 border-l-6 border-fuchsia-500 shadow-[0_0_8px_2px_rgba(128,0,128,0.5)] -translate-x-3 translate-y-3"></div>
+            <div className="absolute bottom-0 right-0 w-10 h-10 border-b-6 border-r-6 border-fuchsia-500 shadow-[0_0_8px_2px_rgba(128,0,128,0.5)] translate-x-3 translate-y-3"></div>
 
-          <h2 className="text-2xl md:text-3xl mb-8 leading-relaxed text-gray-800">
-            <span className="block font-princess text-4xl md:text-5xl aurora-text-gradient font-bold mb-2 drop-shadow-[0_2px_6px_rgba(180,80,255,0.25)]">
+          <h2 className="text-2xl md:text-3xl mb-8 leading-relaxed text-purple-800 font-bold drop-shadow-[0_2px_6px_rgba(255,0,255,0.18)]">
+            <span className="block font-princess text-4xl md:text-5xl bg-gradient-to-r from-fuchsia-500 to-purple-700 bg-clip-text text-transparent font-bold mb-2 drop-shadow-[0_2px_6px_rgba(255,0,255,0.25)]">
               {auroraDemoData.invitation.message}
             </span>
-            <span className="text-3xl md:text-4xl font-princess font-bold text-aurora-primary drop-shadow-[0_2px_6px_rgba(180,80,255,0.25)]">
+            <span className="text-3xl md:text-4xl font-princess font-bold text-fuchsia-600 drop-shadow-[0_2px_6px_rgba(128,0,128,0.25)]">
               {auroraDemoData.invitation.subtitle}
             </span>
             <br />
-            <span className="text-xl md:text-2xl font-light italic text-aurora-primary mt-4 block drop-shadow-[0_1px_4px_rgba(180,80,255,0.18)]">
+            <span className="text-xl md:text-2xl font-light italic text-purple-700 mt-4 block drop-shadow-[0_1px_4px_rgba(128,0,128,0.18)]">
               {auroraDemoData.invitation.blessing}
             </span>
           </h2>
@@ -67,35 +67,35 @@ export function AuroraInvitation() {
           </div>
 
           {/* Información de padres - Estilo Aurora - FASE 6: Mejorada */}
-          <div className="my-12 bg-white/95 rounded-2xl p-8 shadow-xl border-2 border-aurora-primary/40 backdrop-blur-md">
+          <div className="my-12 bg-white/95 rounded-2xl p-8 shadow-xl border-2 border-fuchsia-500 backdrop-blur-md">
             <div className="space-y-4">
-              <p className="font-playfair text-2xl font-bold text-gray-900 drop-shadow-[0_2px_6px_rgba(180,80,255,0.18)]">
+              <p className="font-playfair text-2xl font-bold text-purple-900 drop-shadow-[0_2px_6px_rgba(255,0,255,0.18)]">
                 {auroraDemoData.invitation.parents.father}
               </p>
               <div className="flex items-center justify-center">
-                <div className="w-8 h-1 bg-gradient-to-r from-aurora-primary via-aurora-secondary to-aurora-tertiary rounded-full"></div>
-                <p className="mx-4 text-aurora-primary font-bold text-lg drop-shadow-[0_1px_4px_rgba(180,80,255,0.18)]">&</p>
-                <div className="w-8 h-1 bg-gradient-to-r from-aurora-tertiary via-aurora-secondary to-aurora-primary rounded-full"></div>
+                <div className="w-8 h-1 bg-gradient-to-r from-fuchsia-500 via-purple-500 to-fuchsia-500 rounded-full"></div>
+                <p className="mx-4 text-fuchsia-600 font-bold text-lg drop-shadow-[0_1px_4px_rgba(128,0,128,0.18)]">&</p>
+                <div className="w-8 h-1 bg-gradient-to-r from-purple-500 via-fuchsia-500 to-purple-500 rounded-full"></div>
               </div>
-              <p className="font-playfair text-2xl font-bold text-gray-900 drop-shadow-[0_2px_6px_rgba(180,80,255,0.18)]">
+              <p className="font-playfair text-2xl font-bold text-purple-900 drop-shadow-[0_2px_6px_rgba(255,0,255,0.18)]">
                 {auroraDemoData.invitation.parents.mother}
               </p>
             </div>
           </div>
 
-          {/* Mensaje decorativo premium - estilo Aurora - FASE 7: Fortalecido */}
-          <div className="mt-8 p-6 bg-gradient-to-r from-aurora-200/90 to-aurora-300/85 rounded-xl border-2 border-aurora-primary/50 shadow-lg">
-            <p className="text-gray-900 italic font-princess text-2xl font-bold drop-shadow-[0_2px_6px_rgba(180,80,255,0.18)]">
+          {/* Mensaje decorativo premium - estilo Aurora - FASE 5: Aurora Vibrante morado-fucsia */}
+          <div className="mt-8 p-6 bg-gradient-to-r from-fuchsia-500/90 to-purple-600/85 rounded-xl border-2 border-fuchsia-500 shadow-lg">
+            <p className="text-purple-900 italic font-princess text-2xl font-bold drop-shadow-[0_2px_6px_rgba(255,0,255,0.18)]">
               {auroraDemoData.invitation.decorativeMessage}
             </p>
           </div>
 
-          {/* Decoración floral - símbolo de Aurora/La Bella Durmiente - FASE 8: Mejorada */}
+          {/* Decoración floral - símbolo de Aurora/La Bella Durmiente - FASE 6: Aurora Vibrante morado-fucsia */}
           <div className="mt-8 flex justify-center animate-pulse-slow">
-            <div className="relative w-16 h-16 shadow-xl ring-2 ring-aurora-primary/40">
-              <div className="absolute inset-0 aurora-shimmer rounded-full bg-gradient-to-br from-aurora-primary/60 via-aurora-secondary/40 to-aurora-tertiary/60"></div>
+            <div className="relative w-16 h-16 shadow-xl ring-2 ring-fuchsia-500/40">
+              <div className="absolute inset-0 aurora-shimmer rounded-full bg-gradient-to-br from-fuchsia-500/60 via-purple-500/40 to-fuchsia-600/60"></div>
               <svg 
-                className="w-full h-full text-aurora-tertiary drop-shadow-[0_2px_8px_rgba(180,80,255,0.25)]" 
+                className="w-full h-full text-fuchsia-500 drop-shadow-[0_2px_8px_rgba(128,0,128,0.25)]" 
                 viewBox="0 0 24 24" 
                 fill="none" 
                 xmlns="http://www.w3.org/2000/svg"
@@ -125,14 +125,7 @@ export function AuroraInvitation() {
           </div>
         </div>
 
-        {/* Nota del tema Aurora - FASE 9: Mejorada */}
-        <div 
-        style={{display:'none'}}
-        className="mt-8 p-3 bg-aurora-100/90 rounded-lg border-2 border-aurora-primary/40 backdrop-blur-md shadow-md">
-          <p className="text-xs text-gray-900 font-semibold">
-            👑 <strong>Tema Aurora:</strong> Invitación inspirada en la princesa Aurora con elementos de cuento de hadas y diseño exclusivo.
-          </p>
-        </div>
+        
       </div>
     </section>
   )

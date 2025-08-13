@@ -147,14 +147,14 @@ export function AuroraAttendance() {
         <div className="absolute inset-0 bg-white/88 backdrop-blur-sm"></div>
       </div>
 
-      {/* Elementos decorativos flotantes */}
-      <div className="absolute top-10 left-10 w-16 h-16 opacity-20 text-aurora-tertiary z-5">
+      {/* Elementos decorativos flotantes - Fucsia/Morado */}
+      <div className="absolute top-10 left-10 w-16 h-16 opacity-20 text-fuchsia-500 z-5">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 2L15 6L19 7L17 11L19 15L15 16L12 20L9 16L5 15L7 11L5 7L9 6L12 2Z" stroke="currentColor" strokeWidth="1.5" fill="currentColor" fillOpacity="0.3" />
         </svg>
       </div>
       
-      <div className="absolute bottom-10 right-10 w-12 h-12 opacity-20 text-aurora-tertiary z-5">
+      <div className="absolute bottom-10 right-10 w-12 h-12 opacity-20 text-purple-700 z-5">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 2L14 8L20 8L15 12L17 18L12 14L7 18L9 12L4 8L10 8L12 2Z" stroke="currentColor" strokeWidth="1.5" fill="currentColor" fillOpacity="0.3" />
         </svg>
@@ -166,14 +166,14 @@ export function AuroraAttendance() {
           isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
         }`}
       >
-        {/* Encabezado decorativo */}
+        {/* Encabezado decorativo - Fucsia/Morado */}
         <div className="text-center mb-10">
           <div className="inline-block relative">
             {/* Elemento decorativo superior - corona */}
             <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12">
               <svg 
                 viewBox="0 0 24 24" 
-                className="w-full h-full text-aurora-tertiary"
+                className="w-full h-full text-fuchsia-500"
                 fill="none" 
                 xmlns="http://www.w3.org/2000/svg"
               >
@@ -184,54 +184,51 @@ export function AuroraAttendance() {
                   fill="none"
                 />
               </svg>
-              <div className="absolute inset-0 aurora-shimmer rounded-full"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-700 via-fuchsia-500 to-purple-700 opacity-30 rounded-full"></div>
             </div>
-            
-            <h2 className="font-princess aurora-text-gradient text-4xl md:text-5xl relative">
+            <h2 className="font-princess bg-gradient-to-r from-purple-700 via-fuchsia-500 to-purple-700 bg-clip-text text-transparent text-4xl md:text-5xl relative">
               Confirma tu Asistencia
             </h2>
           </div>
-          
-          {/* Línea decorativa */}
+          {/* Línea decorativa - Fucsia/Morado */}
           <div className="flex items-center justify-center mt-2">
-            <div className="h-px w-16 bg-gradient-to-r from-transparent via-aurora-tertiary to-transparent"></div>
+            <div className="h-px w-16 bg-gradient-to-r from-transparent via-fuchsia-500 to-transparent"></div>
             <div className="mx-4 relative">
-              <span className="text-aurora-tertiary text-sm">✧</span>
+              <span className="text-purple-700 text-sm">✧</span>
             </div>
-            <div className="h-px w-16 bg-gradient-to-r from-transparent via-aurora-tertiary to-transparent"></div>
+            <div className="h-px w-16 bg-gradient-to-r from-transparent via-purple-700 to-transparent"></div>
           </div>
-          
-          <p className="text-aurora-secondary mt-4 italic text-xl">
+          <p className="text-fuchsia-700 mt-4 italic text-xl">
             {auroraDemoData.attendance?.message || "Rosa Gold solo la Quinceañera"}
           </p>
-          <p className="text-gray-600 mt-2">
+          <p className="text-purple-700 mt-2">
             {auroraDemoData.attendance?.subtitle || "Espero que no sea impedimento para que ustedes puedan asistir a mi fiesta."}
           </p>
         </div>
         
         {/* Formulario decorativo */}
-        <div className="bg-white/80 backdrop-blur-sm p-6 md:p-8 rounded-lg border border-aurora-tertiary/30 aurora-shadow relative overflow-hidden">
+  <div className="bg-white/80 backdrop-blur-sm p-6 md:p-8 rounded-lg border-2 border-fuchsia-500 shadow-lg relative overflow-hidden">
           {/* Efecto decorativo de fondo */}
           <div className="absolute inset-0 aurora-shimmer opacity-10"></div>
           
           {formSubmitted ? (
             <div className="text-center py-8">
-              <div className="w-16 h-16 mx-auto mb-4 text-aurora-primary">
+              <div className="w-16 h-16 mx-auto mb-4 text-fuchsia-500">
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M20 6L9 17L4 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
-              <h3 className="font-princess text-3xl text-aurora-primary mb-2">¡Perfecto!</h3>
-              <p className="text-aurora-secondary mb-4">Se ha abierto WhatsApp con tu confirmación.</p>
-              <div className="bg-aurora-50/50 p-4 rounded-lg border border-aurora-tertiary/30 mb-4">
-                <p className="text-sm text-aurora-700">
+              <h3 className="font-princess text-3xl bg-gradient-to-r from-purple-700 via-fuchsia-500 to-purple-700 bg-clip-text text-transparent mb-2">¡Perfecto!</h3>
+              <p className="text-fuchsia-700 mb-4">Se ha abierto WhatsApp con tu confirmación.</p>
+              <div className="bg-gradient-to-r from-purple-700/10 via-fuchsia-500/10 to-purple-700/10 p-4 rounded-lg border-2 border-fuchsia-500 mb-4">
+                <p className="text-sm text-purple-700">
                   📱 <strong>Siguiente paso:</strong> Envía el mensaje de WhatsApp que se generó automáticamente
                 </p>
-                <p className="text-xs text-gray-600 mt-2">
+                <p className="text-xs text-fuchsia-700 mt-2">
                   Si no se abrió WhatsApp automáticamente, puedes enviarnos tu confirmación al <strong>867-154-4765</strong>
                 </p>
               </div>
-              <p className="text-gray-500 text-sm">
+              <p className="text-purple-700 text-sm">
                 💌 ¡Gracias por confirmar tu asistencia! Nos emociona tenerte en este día tan especial.
               </p>
             </div>
@@ -239,7 +236,7 @@ export function AuroraAttendance() {
             <form onSubmit={handleSubmit} className="space-y-6 relative">
               {/* Campo de nombre */}
               <div>
-                <Label htmlFor="name" className="text-aurora-secondary font-medium">
+                <Label htmlFor="name" className="text-fuchsia-700 font-medium">
                   Nombre completo <span className="text-red-400">*</span>
                 </Label>
                 <Input 
@@ -249,14 +246,14 @@ export function AuroraAttendance() {
                   value={formData.name}
                   onChange={handleChange}
                   placeholder="Tu nombre completo"
-                  className="mt-1 border-aurora-tertiary/30 focus:border-aurora-primary focus:ring-aurora-primary/30"
+                  className="mt-1 border-fuchsia-500/30 focus:border-fuchsia-500 focus:ring-fuchsia-500/30"
                   required
                 />
               </div>
               
               {/* Campo de confirmación */}
               <div>
-                <Label className="text-aurora-secondary font-medium">
+                <Label className="text-purple-700 font-medium">
                   ¿Podrás acompañarme? <span className="text-red-400">*</span>
                 </Label>
                 <RadioGroup
@@ -265,12 +262,12 @@ export function AuroraAttendance() {
                   className="mt-2 flex space-x-4"
                 >
                   <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="yes" id="yes" className="text-aurora-primary" />
-                    <Label htmlFor="yes" className="text-gray-700">Sí, ahí estaré</Label>
+                    <RadioGroupItem value="yes" id="yes" className="text-fuchsia-500 border-2 border-fuchsia-500" />
+                    <Label htmlFor="yes" className="text-purple-700">Sí, ahí estaré</Label>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="no" id="no" className="text-aurora-primary" />
-                    <Label htmlFor="no" className="text-gray-700">No podré asistir</Label>
+                    <RadioGroupItem value="no" id="no" className="text-purple-700 border-2 border-purple-700" />
+                    <Label htmlFor="no" className="text-fuchsia-700">No podré asistir</Label>
                   </div>
                 </RadioGroup>
               </div>
@@ -279,7 +276,7 @@ export function AuroraAttendance() {
                 <>
                   {/* Campo de acompañantes */}
                   <div>
-                    <Label htmlFor="companions" className="text-aurora-secondary font-medium">
+                    <Label htmlFor="companions" className="text-purple-700 font-medium">
                       Nombre(s) de acompañante(s)
                     </Label>
                     <Input 
@@ -289,13 +286,13 @@ export function AuroraAttendance() {
                       value={formData.companions}
                       onChange={handleChange}
                       placeholder="Nombre de las personas que te acompañarán"
-                      className="mt-1 border-aurora-tertiary/30 focus:border-aurora-primary focus:ring-aurora-primary/30"
+                      className="mt-1 border-purple-700/30 focus:border-purple-700 focus:ring-purple-700/30"
                     />
                   </div>
                   
                   {/* Campo de teléfono */}
                   <div>
-                    <Label htmlFor="phone" className="text-aurora-secondary font-medium">
+                    <Label htmlFor="phone" className="text-fuchsia-700 font-medium">
                       Número de celular (México) <span className="text-red-400">*</span>
                     </Label>
                     <Input 
@@ -305,7 +302,7 @@ export function AuroraAttendance() {
                       value={formData.phone}
                       onChange={handleChange}
                       placeholder="5512345678 (10 dígitos)"
-                      className="mt-1 border-aurora-tertiary/30 focus:border-aurora-primary focus:ring-aurora-primary/30"
+                      className="mt-1 border-fuchsia-500/30 focus:border-fuchsia-500 focus:ring-fuchsia-500/30"
                       maxLength={10}
                       pattern="[0-9]{10}"
                       required
@@ -317,7 +314,7 @@ export function AuroraAttendance() {
                   
                   {/* Campo de mensaje */}
                   <div>
-                    <Label htmlFor="message" className="text-aurora-secondary font-medium">
+                    <Label htmlFor="message" className="text-purple-700 font-medium">
                       Mensaje (opcional)
                     </Label>
                     <Textarea 
@@ -326,7 +323,7 @@ export function AuroraAttendance() {
                       value={formData.message}
                       onChange={handleChange}
                       placeholder="¿Algo que quieras decirme?"
-                      className="mt-1 border-aurora-tertiary/30 focus:border-aurora-primary focus:ring-aurora-primary/30"
+                      className="mt-1 border-purple-700/30 focus:border-purple-700 focus:ring-purple-700/30"
                       rows={3}
                     />
                   </div>
@@ -338,7 +335,7 @@ export function AuroraAttendance() {
                 <Button
                   type="submit"
                   disabled={isSubmitting || !formData.name || !formData.response || (formData.response === 'yes' && !formData.phone)}
-                  className="w-full bg-aurora-primary hover:bg-aurora-secondary text-white transition-all duration-300 relative group overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full bg-gradient-to-r from-purple-700 via-fuchsia-500 to-purple-700 hover:from-fuchsia-500 hover:via-purple-700 hover:to-fuchsia-500 text-white font-semibold transition-all duration-300 relative group overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed border-2 border-fuchsia-500 shadow-lg"
                 >
                   <span className="relative z-10 flex items-center justify-center gap-2">
                     {isSubmitting ? (
@@ -352,7 +349,7 @@ export function AuroraAttendance() {
                       </>
                     )}
                   </span>
-                  <div className="absolute inset-0 aurora-shimmer opacity-0 group-hover:opacity-30 transition-opacity"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-700 via-fuchsia-500 to-purple-700 opacity-0 group-hover:opacity-30 transition-opacity"></div>
                 </Button>
                 
                 {/* Nota informativa */}
@@ -365,13 +362,13 @@ export function AuroraAttendance() {
             </form>
           )}
           
-          {/* Elementos decorativos en las esquinas */}
-          <div className="absolute top-3 left-3 w-6 h-6 text-aurora-tertiary/40">
+          {/* Elementos decorativos en las esquinas - Fucsia/Morado */}
+          <div className="absolute top-3 left-3 w-6 h-6 text-fuchsia-500/40">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 2L14 8L20 8L15 12L17 18L12 14L7 18L9 12L4 8L10 8L12 2Z" stroke="currentColor" strokeWidth="1.5" fill="currentColor" fillOpacity="0.3" />
             </svg>
           </div>
-          <div className="absolute bottom-3 right-3 w-6 h-6 text-aurora-tertiary/40">
+          <div className="absolute bottom-3 right-3 w-6 h-6 text-purple-700/40">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 2L14 8L20 8L15 12L17 18L12 14L7 18L9 12L4 8L10 8L12 2Z" stroke="currentColor" strokeWidth="1.5" fill="currentColor" fillOpacity="0.3" />
             </svg>

@@ -33,19 +33,19 @@ export function AuroraThankYou() {
       <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-aurora-50/85 to-white/80 backdrop-blur-sm z-5"></div>
       
       {/* Elementos decorativos flotantes */}
-      <div className="absolute top-20 left-[15%] w-8 h-8 text-aurora-tertiary opacity-20 animate-pulse z-5">
+  <div className="absolute top-20 left-[15%] w-8 h-8 text-fuchsia-500 opacity-20 animate-pulse z-5">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 2L14 8L20 8L15 12L17 18L12 14L7 18L9 12L4 8L10 8L12 2Z" stroke="currentColor" strokeWidth="1.5" fill="currentColor" fillOpacity="0.3" />
         </svg>
       </div>
       
-      <div className="absolute top-40 right-[20%] w-12 h-12 text-aurora-tertiary opacity-20 animate-pulse z-5" style={{ animationDelay: "1s" }}>
+  <div className="absolute top-40 right-[20%] w-12 h-12 text-purple-700 opacity-20 animate-pulse z-5" style={{ animationDelay: "1s" }}>
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 2L15 6L19 7L17 11L19 15L15 16L12 20L9 16L5 15L7 11L5 7L9 6L12 2Z" stroke="currentColor" strokeWidth="1.5" fill="currentColor" fillOpacity="0.3" />
         </svg>
       </div>
       
-      <div className="absolute bottom-20 left-[30%] w-10 h-10 text-aurora-tertiary opacity-20 animate-pulse z-5" style={{ animationDelay: "2s" }}>
+  <div className="absolute bottom-20 left-[30%] w-10 h-10 text-fuchsia-500 opacity-20 animate-pulse z-5" style={{ animationDelay: "2s" }}>
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 2L14 8L20 8L15 12L17 18L12 14L7 18L9 12L4 8L10 8L12 2Z" stroke="currentColor" strokeWidth="1.5" fill="currentColor" fillOpacity="0.3" />
         </svg>
@@ -59,16 +59,16 @@ export function AuroraThankYou() {
         {/* Marco decorativo principal */}
         <div className="bg-white/80 backdrop-blur-sm p-8 md:p-12 rounded-lg border border-aurora-tertiary/30 shadow-xl relative overflow-hidden">
           {/* Efecto de fondo shimmer */}
-          <div className="absolute inset-0 aurora-shimmer opacity-20"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-700 via-fuchsia-500 to-purple-700 opacity-20"></div>
           
           {/* Elementos decorativos en las esquinas */}
-          <div className="absolute top-3 left-3 w-8 h-8 text-aurora-tertiary/40">
+          <div className="absolute top-3 left-3 w-8 h-8 text-fuchsia-500/40">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 2L15 6L19 7L17 11L19 15L15 16L12 20L9 16L5 15L7 11L5 7L9 6L12 2Z" stroke="currentColor" strokeWidth="1.5" fill="currentColor" fillOpacity="0.3" />
             </svg>
           </div>
           
-          <div className="absolute bottom-3 right-3 w-8 h-8 text-aurora-tertiary/40">
+          <div className="absolute bottom-3 right-3 w-8 h-8 text-purple-700/40">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 2L15 6L19 7L17 11L19 15L15 16L12 20L9 16L5 15L7 11L5 7L9 6L12 2Z" stroke="currentColor" strokeWidth="1.5" fill="currentColor" fillOpacity="0.3" />
             </svg>
@@ -76,36 +76,36 @@ export function AuroraThankYou() {
           
           {/* Contenido principal */}
           <div className="relative">
-            {/* Corona decorativa */}
-            <div className="mx-auto w-16 h-16 mb-4 text-aurora-tertiary">
+            {/* Corona decorativa - Fucsia/Morado */}
+            <div className="mx-auto w-16 h-16 mb-4 text-fuchsia-500">
               <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 2L15 6L19 7L17 11L19 15L15 16L12 20L9 16L5 15L7 11L5 7L9 6L12 2Z" stroke="currentColor" strokeWidth="2" fill="currentColor" fillOpacity="0.2" />
+                <path d="M12 2L15 6L19 7L17 11L19 15L15 16L12 20L9 16L5 15L7 11L5 7L9 6L12 2Z" stroke="currentColor" strokeWidth="2" fill="currentColor" fillOpacity="0.4" />
               </svg>
             </div>
-            
-            <h2 className="font-princess aurora-text-gradient text-4xl md:text-5xl mb-6">
+
+            <h2 className="font-princess bg-gradient-to-r from-purple-700 via-fuchsia-500 to-purple-700 bg-clip-text text-transparent text-4xl md:text-5xl mb-6 drop-shadow-sm">
               {thankYouData.title}
             </h2>
-            
-            {/* Separador decorativo */}
+
+            {/* Separador decorativo - Fucsia/Morado */}
             <div className="flex items-center justify-center my-6">
-              <div className="h-px w-16 bg-gradient-to-r from-transparent via-aurora-tertiary to-transparent"></div>
+              <div className="h-px w-16 bg-gradient-to-r from-transparent via-fuchsia-500 to-transparent"></div>
               <div className="mx-4 relative">
-                <span className="text-aurora-tertiary text-sm">✧</span>
+                <span className="text-purple-700 text-sm font-bold drop-shadow-sm">✧</span>
               </div>
-              <div className="h-px w-16 bg-gradient-to-r from-transparent via-aurora-tertiary to-transparent"></div>
+              <div className="h-px w-16 bg-gradient-to-r from-transparent via-purple-700 to-transparent"></div>
             </div>
             
-            {/* Mensaje principal */}
+            {/* Mensaje principal - Fucsia/Morado */}
             <div className="mb-8 max-w-2xl mx-auto">
-              <p className="text-aurora-secondary text-lg italic leading-relaxed">
+              <p className="bg-gradient-to-r from-fuchsia-500 via-purple-700 to-fuchsia-500 bg-clip-text text-transparent text-lg italic leading-relaxed drop-shadow-sm">
                 {thankYouData.personalMessage}
               </p>
             </div>
-            
-            {/* Detalles adicionales */}
-            <div className="p-6 bg-aurora-accent/10 rounded-lg border border-aurora-tertiary/20 max-w-xl mx-auto">
-              <p className="text-gray-700">
+
+            {/* Detalles adicionales - Fucsia/Morado */}
+            <div className="p-6 bg-gradient-to-r from-fuchsia-500/10 via-purple-700/10 to-fuchsia-500/10 rounded-lg border border-fuchsia-500/20 max-w-xl mx-auto">
+              <p className="text-purple-700">
                 Les agradezco de todo corazón por hacer de este día algo tan especial y mágico. 
                 Cada uno de sus buenos deseos, su presencia y su cariño han convertido mi fiesta de XV años 
                 en una historia de cuento de hadas que siempre recordaré.
@@ -114,10 +114,9 @@ export function AuroraThankYou() {
             
             {/* Firma */}
             <div className="mt-8 flex flex-col items-center">
-              <div className="mb-2 italic text-aurora-secondary">
+              <div className="mb-2 italic bg-gradient-to-r from-fuchsia-500 via-purple-700 to-fuchsia-500 bg-clip-text text-transparent font-semibold">
                 {thankYouData.signature}
               </div>
-              
               {/* Imagen de firma */}
               <div className="w-40 h-20 relative">
                 {'imageUrl' in thankYouData && thankYouData.imageUrl ? (
@@ -129,7 +128,7 @@ export function AuroraThankYou() {
                     className="opacity-80"
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center font-princess text-aurora-primary text-xl">
+                  <div className="w-full h-full flex items-center justify-center font-princess bg-gradient-to-r from-purple-700 via-fuchsia-500 to-purple-700 bg-clip-text text-transparent text-xl">
                     Pamela Kitana
                   </div>
                 )}

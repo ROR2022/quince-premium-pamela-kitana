@@ -131,19 +131,19 @@ export function AuroraGallery() {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <div className="inline-flex items-center gap-2 aurora-gradient text-white px-6 py-3 rounded-full text-sm font-medium mb-6 shadow-lg border border-aurora-tertiary/30 aurora-shadow">
-            <Crown size={18} />
-            <span>Galería Real de Pamela Kitana</span>
-            <Sparkles size={16} />
+          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-700 via-fuchsia-500 to-purple-700 text-white px-6 py-3 rounded-full text-sm font-medium mb-6 shadow-lg border-2 border-fuchsia-500 aurora-shadow">
+            <Crown size={18} className="text-fuchsia-300" />
+            <span className="drop-shadow-[0_2px_8px_rgba(180,80,255,0.25)]">Galería Real de Pamela Kitana</span>
+            <Sparkles size={16} className="text-purple-300" />
           </div>
-          
-          <h2 className="text-4xl md:text-5xl font-princess aurora-text-gradient mb-4">
+
+          <h2 className="text-4xl md:text-5xl font-princess bg-gradient-to-r from-purple-700 via-fuchsia-500 to-purple-700 bg-clip-text text-transparent mb-4">
             Momentos de Princesa
           </h2>
-          <p className="text-xl md:text-2xl text-aurora-secondary mb-3 font-medium">
+          <p className="text-xl md:text-2xl text-fuchsia-700 mb-3 font-medium">
             {totalImages} Recuerdos Mágicos
           </p>
-          <p className="text-aurora-700 max-w-3xl mx-auto text-lg">
+          <p className="text-purple-700 max-w-3xl mx-auto text-lg">
             Una colección de momentos únicos e irrepetibles de nuestra quinceañera. 
             Cada fotografía cuenta la historia de un sueño hecho realidad.
           </p>
@@ -163,8 +163,8 @@ export function AuroraGallery() {
                 flex items-center gap-2 px-4 py-2 rounded-full font-medium text-sm
                 transition-all duration-300 border-2 backdrop-blur-sm
                 ${isAutoPlaying 
-                  ? 'bg-aurora-primary text-white border-aurora-primary shadow-lg' 
-                  : 'bg-white/70 text-aurora-700 border-aurora-tertiary/50 hover:bg-aurora-primary/10'
+                  ? 'bg-fuchsia-500 text-white border-fuchsia-500 shadow-lg' 
+                  : 'bg-white/70 text-purple-700 border-purple-700/50 hover:bg-fuchsia-500/10'
                 }
               `}
             >
@@ -173,66 +173,65 @@ export function AuroraGallery() {
             </button>
             
             {favoriteImage !== null && (
-              <div className="flex items-center gap-2 bg-aurora-tertiary/20 text-aurora-700 px-4 py-2 rounded-full text-sm backdrop-blur-sm border border-aurora-tertiary/30">
-                <Heart size={16} className="text-aurora-primary" />
+              <div className="flex items-center gap-2 bg-fuchsia-500/20 text-purple-700 px-4 py-2 rounded-full text-sm backdrop-blur-sm border border-fuchsia-500/30">
+                <Heart size={16} className="text-fuchsia-500" />
                 <span>Foto favorita marcada</span>
               </div>
             )}
           </motion.div>
         )}
 
-        {/* Separador decorativo estilo Aurora */}
+        {/* Separador decorativo estilo Aurora - Fucsia/Morado */}
         <motion.div 
           className="flex items-center justify-center my-8"
           initial={{ opacity: 0, width: 0 }}
           animate={isInView ? { opacity: 1, width: 'auto' } : { opacity: 0, width: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
-          <div className="w-16 h-px bg-gradient-to-r from-aurora-tertiary to-aurora-primary"></div>
+          <div className="w-16 h-px bg-gradient-to-r from-fuchsia-500 to-purple-700"></div>
           <div className="mx-6 relative">
-            <Crown size={28} className="text-aurora-primary" />
-            <div className="absolute inset-0 aurora-shimmer rounded-full"></div>
+            <Crown size={28} className="text-fuchsia-500" />
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-700 via-fuchsia-500 to-purple-700 opacity-30 rounded-full"></div>
           </div>
-          <div className="w-16 h-px bg-gradient-to-r from-aurora-primary to-aurora-tertiary"></div>
+          <div className="w-16 h-px bg-gradient-to-r from-purple-700 to-fuchsia-500"></div>
         </motion.div>
 
-        {/* Marco decorativo Premium para galería */}
+        {/* Marco decorativo Premium para galería - Fucsia/Morado */}
         <motion.div 
-          className="relative mt-8 border-4 border-aurora-tertiary/40 p-6 rounded-2xl bg-white/60 backdrop-blur-md shadow-2xl"
+          className="relative mt-8 border-4 border-fuchsia-500/40 p-6 rounded-2xl bg-white/60 backdrop-blur-md shadow-2xl"
           initial={{ opacity: 0, scale: 0.95 }}
           animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
           transition={{ duration: 0.8, delay: 0.8 }}
         >
           {/* Decoraciones esquinas mejoradas */}
-          <div className="absolute top-0 left-0 w-12 h-12 border-t-4 border-l-4 border-aurora-primary -translate-x-2 -translate-y-2 rounded-tl-lg"></div>
-          <div className="absolute top-0 right-0 w-12 h-12 border-t-4 border-r-4 border-aurora-primary translate-x-2 -translate-y-2 rounded-tr-lg"></div>
-          <div className="absolute bottom-0 left-0 w-12 h-12 border-b-4 border-l-4 border-aurora-primary -translate-x-2 translate-y-2 rounded-bl-lg"></div>
-          <div className="absolute bottom-0 right-0 w-12 h-12 border-b-4 border-r-4 border-aurora-primary translate-x-2 translate-y-2 rounded-br-lg"></div>
+          <div className="absolute top-0 left-0 w-12 h-12 border-t-4 border-l-4 border-purple-700 -translate-x-2 -translate-y-2 rounded-tl-lg"></div>
+          <div className="absolute top-0 right-0 w-12 h-12 border-t-4 border-r-4 border-fuchsia-500 translate-x-2 -translate-y-2 rounded-tr-lg"></div>
+          <div className="absolute bottom-0 left-0 w-12 h-12 border-b-4 border-l-4 border-fuchsia-500 -translate-x-2 translate-y-2 rounded-bl-lg"></div>
+          <div className="absolute bottom-0 right-0 w-12 h-12 border-b-4 border-r-4 border-purple-700 translate-x-2 translate-y-2 rounded-br-lg"></div>
           
           {/* Coronas decorativas en las esquinas */}
-          <Crown size={20} className="absolute top-2 left-2 text-aurora-primary" />
-          <Crown size={20} className="absolute top-2 right-2 text-aurora-primary" />
-          <Crown size={20} className="absolute bottom-2 left-2 text-aurora-primary" />
-          <Crown size={20} className="absolute bottom-2 right-2 text-aurora-primary" />
+          <Crown size={20} className="absolute top-2 left-2 text-fuchsia-500" />
+          <Crown size={20} className="absolute top-2 right-2 text-purple-700" />
+          <Crown size={20} className="absolute bottom-2 left-2 text-purple-700" />
+          <Crown size={20} className="absolute bottom-2 right-2 text-fuchsia-500" />
           
           {/* Galería principal optimizada */}
           <div className="relative h-80 md:h-[500px] group">
             <div className="w-full h-full flex justify-center">
-              <div className="relative w-full max-w-3xl h-full overflow-hidden rounded-2xl shadow-2xl border-4 border-white">
+              <div className="relative w-full max-w-3xl h-full overflow-hidden rounded-2xl shadow-2xl border-4 border-fuchsia-500">
                 {/* Indicadores superiores mejorados */}
                 <div className="absolute top-4 left-4 right-4 flex justify-between items-center z-10">
-                  <div className="bg-aurora-primary/90 text-white px-4 py-2 rounded-full shadow-md text-sm backdrop-blur-sm font-medium">
+                  <div className="bg-gradient-to-r from-purple-700 via-fuchsia-500 to-purple-700 text-white px-4 py-2 rounded-full shadow-md text-sm backdrop-blur-sm font-medium border-2 border-fuchsia-500">
                     <span>Haz clic para ampliar</span>
                   </div>
-                  
                   {isClient && (
                     <button
                       onClick={() => toggleFavorite(currentIndex)}
                       className={`
                         p-2 rounded-full shadow-md transition-all backdrop-blur-sm
                         ${favoriteImage === currentIndex 
-                          ? 'bg-aurora-primary text-white' 
-                          : 'bg-white/80 text-aurora-primary hover:bg-aurora-primary/10'
+                          ? 'bg-fuchsia-500 text-white' 
+                          : 'bg-white/80 text-fuchsia-500 hover:bg-fuchsia-500/10'
                         }
                       `}
                       aria-label="Marcar como favorita"
@@ -269,18 +268,18 @@ export function AuroraGallery() {
                       priority={currentIndex <= 2}
                     />
                     
-                    {/* Overlay gradiente mejorado */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-aurora-primary/60 via-transparent to-transparent pointer-events-none"></div>
+                    {/* Overlay gradiente mejorado - Fucsia/Morado */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-fuchsia-500/60 via-transparent to-transparent pointer-events-none"></div>
                     
-                    {/* Caption mejorado */}
-                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-aurora-primary/90 to-transparent p-6">
+                    {/* Caption mejorado - Fucsia/Morado */}
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-purple-700/90 to-transparent p-6">
                       <div className="flex items-center gap-2 mb-2">
                         {favoriteImage === currentIndex && (
-                          <Heart size={20} className="text-white fill-white" />
+                          <Heart size={20} className="text-fuchsia-500 fill-fuchsia-500" />
                         )}
-                        <Crown size={20} className="text-white" />
+                        <Crown size={20} className="text-purple-700" />
                       </div>
-                      <p className="text-white text-lg md:text-xl font-medium font-princess">
+                      <p className="text-fuchsia-500 text-lg md:text-xl font-medium font-princess">
                         {images[currentIndex]?.caption || 'Momento especial'}
                       </p>
                     </div>
@@ -294,7 +293,7 @@ export function AuroraGallery() {
               <>
                 <button
                   onClick={goToPrevious}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 aurora-gradient text-white p-4 rounded-full shadow-lg hover:scale-110 transition-all z-10 aurora-shadow"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-gradient-to-r from-purple-700 via-fuchsia-500 to-purple-700 text-white p-4 rounded-full shadow-lg hover:scale-110 transition-all z-10 border-2 border-fuchsia-500"
                   aria-label="Imagen anterior"
                 >
                   <ChevronLeft size={24} />
@@ -302,7 +301,7 @@ export function AuroraGallery() {
 
                 <button
                   onClick={goToNext}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 aurora-gradient text-white p-4 rounded-full shadow-lg hover:scale-110 transition-all z-10 aurora-shadow"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-gradient-to-r from-fuchsia-500 via-purple-700 to-fuchsia-500 text-white p-4 rounded-full shadow-lg hover:scale-110 transition-all z-10 border-2 border-purple-700"
                   aria-label="Siguiente imagen"
                 >
                   <ChevronRight size={24} />
@@ -319,16 +318,16 @@ export function AuroraGallery() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 1 }}
             >
-              <div className="bg-white/90 backdrop-blur-sm px-6 py-3 rounded-full shadow-lg border border-aurora-tertiary/30">
-                <div className="flex items-center gap-3 text-base">
-                  <Crown size={20} className="text-aurora-primary" />
-                  <span className="font-medium text-aurora-700">
+              <div className="bg-gradient-to-r from-purple-700 via-fuchsia-500 to-purple-700 px-6 py-3 rounded-full shadow-lg border-2 border-fuchsia-500 backdrop-blur-sm">
+                <div className="flex items-center gap-3 text-base text-white">
+                  <Crown size={20} className="text-fuchsia-300" />
+                  <span className="font-medium text-fuchsia-100">
                     Foto {currentIndex + 1} de {totalImages}
                   </span>
                   {isAutoPlaying && (
                     <>
-                      <span className="text-aurora-500">•</span>
-                      <span className="text-aurora-600 text-sm">Auto-play activo</span>
+                      <span className="text-fuchsia-300">•</span>
+                      <span className="text-purple-200 text-sm">Auto-play activo</span>
                     </>
                   )}
                 </div>
@@ -346,10 +345,10 @@ export function AuroraGallery() {
                   className={`
                     h-3 rounded-full transition-all duration-300 flex-shrink-0
                     ${index === currentIndex 
-                      ? 'bg-aurora-primary w-12 shadow-md' 
-                      : 'bg-aurora-tertiary/50 w-3 hover:bg-aurora-tertiary hover:w-6'
+                      ? 'bg-fuchsia-500 w-12 shadow-md' 
+                      : 'bg-purple-700/30 w-3 hover:bg-fuchsia-500 hover:w-6'
                     }
-                    ${favoriteImage === index ? 'ring-2 ring-aurora-primary ring-offset-2' : ''}
+                    ${favoriteImage === index ? 'ring-2 ring-fuchsia-500 ring-offset-2' : ''}
                   `}
                   aria-label={`Ir a imagen ${index + 1}`}
                 />
@@ -365,38 +364,38 @@ export function AuroraGallery() {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.8, delay: 1.2 }}
         >
-          <div className="p-6 bg-aurora-50/80 rounded-xl border border-aurora-tertiary/30 backdrop-blur-sm text-center">
-            <Crown size={32} className="text-aurora-primary mx-auto mb-3" />
-            <h3 className="font-princess text-lg text-aurora-700 mb-2">Quinceañera</h3>
-            <p className="text-aurora-600 text-sm">Pamela Kitana</p>
+          <div className="p-6 bg-gradient-to-br from-purple-700/10 via-fuchsia-500/10 to-purple-700/10 rounded-xl border-2 border-fuchsia-500 backdrop-blur-sm text-center">
+            <Crown size={32} className="text-fuchsia-500 mx-auto mb-3" />
+            <h3 className="font-princess text-lg bg-gradient-to-r from-purple-700 via-fuchsia-500 to-purple-700 bg-clip-text text-transparent mb-2">Quinceañera</h3>
+            <p className="text-purple-700 text-sm">Pamela Kitana</p>
           </div>
           
-          <div className="p-6 bg-aurora-50/80 rounded-xl border border-aurora-tertiary/30 backdrop-blur-sm text-center">
-            <Sparkles size={32} className="text-aurora-primary mx-auto mb-3" />
-            <h3 className="font-princess text-lg text-aurora-700 mb-2">Momentos</h3>
-            <p className="text-aurora-600 text-sm">{totalImages} Recuerdos</p>
+          <div className="p-6 bg-gradient-to-br from-fuchsia-500/10 via-purple-700/10 to-fuchsia-500/10 rounded-xl border-2 border-purple-700 backdrop-blur-sm text-center">
+            <Sparkles size={32} className="text-purple-700 mx-auto mb-3" />
+            <h3 className="font-princess text-lg bg-gradient-to-r from-fuchsia-500 via-purple-700 to-fuchsia-500 bg-clip-text text-transparent mb-2">Momentos</h3>
+            <p className="text-fuchsia-500 text-sm">{totalImages} Recuerdos</p>
           </div>
           
-          <div className="p-6 bg-aurora-50/80 rounded-xl border border-aurora-tertiary/30 backdrop-blur-sm text-center">
-            <Heart size={32} className="text-aurora-primary mx-auto mb-3" />
-            <h3 className="font-princess text-lg text-aurora-700 mb-2">Tema</h3>
-            <p className="text-aurora-600 text-sm">Aurora Princess</p>
+          <div className="p-6 bg-gradient-to-br from-purple-700/10 via-fuchsia-500/10 to-purple-700/10 rounded-xl border-2 border-fuchsia-500 backdrop-blur-sm text-center">
+            <Heart size={32} className="text-fuchsia-500 mx-auto mb-3" />
+            <h3 className="font-princess text-lg bg-gradient-to-r from-purple-700 via-fuchsia-500 to-purple-700 bg-clip-text text-transparent mb-2">Tema</h3>
+            <p className="text-purple-700 text-sm">Aurora Princess</p>
           </div>
         </motion.div>
 
-        {/* Nota del tema Aurora */}
+        {/* Nota del tema Aurora - Fucsia/Morado */}
         <motion.div 
-          className="mt-12 p-6 bg-aurora-50/80 rounded-xl border border-aurora-tertiary/30 max-w-3xl mx-auto backdrop-blur-sm"
+          className="mt-12 p-6 bg-gradient-to-br from-purple-700/10 via-fuchsia-500/10 to-purple-700/10 rounded-xl border-2 border-fuchsia-500 max-w-3xl mx-auto backdrop-blur-sm"
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.8, delay: 1.4 }}
         >
           <div className="flex items-center justify-center gap-2 mb-3">
-            <Crown size={24} className="text-aurora-primary" />
-            <span className="font-princess text-xl text-aurora-700">Galería Real</span>
-            <Crown size={24} className="text-aurora-primary" />
+            <Crown size={24} className="text-fuchsia-500" />
+            <span className="font-princess text-xl bg-gradient-to-r from-purple-700 via-fuchsia-500 to-purple-700 bg-clip-text text-transparent">Galería Real</span>
+            <Crown size={24} className="text-fuchsia-500" />
           </div>
-          <p className="text-aurora-700 text-center">
+          <p className="text-purple-700 text-center">
             Una colección exclusiva de momentos mágicos de nuestra quinceañera. 
             Cada imagen ha sido cuidadosamente seleccionada para contar la historia 
             de este día tan especial.
@@ -428,8 +427,8 @@ export function AuroraGallery() {
                   className={`
                     p-3 rounded-full transition-all backdrop-blur-sm shadow-lg
                     ${favoriteImage === currentIndex 
-                      ? 'bg-aurora-primary text-white' 
-                      : 'bg-white/20 text-white hover:bg-white/30'
+                      ? 'bg-fuchsia-500 text-white' 
+                      : 'bg-white/20 text-fuchsia-500 hover:bg-fuchsia-500/30'
                     }
                   `}
                   aria-label="Marcar como favorita"
@@ -439,7 +438,7 @@ export function AuroraGallery() {
                 
                 <button
                   onClick={closeModal}
-                  className="aurora-gradient text-white p-3 rounded-full z-20 hover:scale-110 transition-all shadow-lg"
+                  className="bg-gradient-to-r from-fuchsia-500 via-purple-700 to-fuchsia-500 text-white p-3 rounded-full z-20 hover:scale-110 transition-all shadow-lg border-2 border-purple-700"
                   aria-label="Cerrar modal"
                 >
                   <X size={24} />
@@ -468,18 +467,18 @@ export function AuroraGallery() {
                 </AnimatePresence>
                 
                 {/* Caption en modal mejorado */}
-                <div className="absolute bottom-6 left-6 right-6 aurora-gradient/95 text-white p-6 rounded-xl shadow-2xl backdrop-blur-sm">
+                <div className="absolute bottom-6 left-6 right-6 bg-gradient-to-r from-purple-700 via-fuchsia-500 to-purple-700 text-white p-6 rounded-xl shadow-2xl backdrop-blur-sm border-2 border-fuchsia-500">
                   <div className="flex items-center gap-3 mb-3">
-                    <Crown size={24} />
+                    <Crown size={24} className="text-fuchsia-500" />
                     {favoriteImage === currentIndex && (
-                      <Heart size={20} fill="currentColor" />
+                      <Heart size={20} className="text-fuchsia-500 fill-fuchsia-500" />
                     )}
-                    <span className="font-princess text-lg">Pamela Kitana</span>
+                    <span className="font-princess text-lg text-fuchsia-300">Pamela Kitana</span>
                   </div>
-                  <p className="font-medium font-princess text-xl mb-2">
+                  <p className="font-medium font-princess text-xl mb-2 text-fuchsia-100">
                     {images[currentIndex]?.caption || 'Momento especial'}
                   </p>
-                  <p className="text-sm text-white/90">
+                  <p className="text-sm text-purple-200">
                     Imagen {currentIndex + 1} de {totalImages} • Tema Aurora Princess
                   </p>
                 </div>
@@ -488,7 +487,7 @@ export function AuroraGallery() {
               {/* Navegación en modal */}
               <button
                 onClick={goToPrevious}
-                className="absolute left-6 top-1/2 -translate-y-1/2 aurora-gradient text-white p-4 rounded-full shadow-lg hover:scale-110 transition-all z-10"
+                className="absolute left-6 top-1/2 -translate-y-1/2 bg-gradient-to-r from-purple-700 via-fuchsia-500 to-purple-700 text-white p-4 rounded-full shadow-lg hover:scale-110 transition-all z-10 border-2 border-fuchsia-500"
                 aria-label="Imagen anterior"
               >
                 <ChevronLeft size={32} />
@@ -496,7 +495,7 @@ export function AuroraGallery() {
 
               <button
                 onClick={goToNext}
-                className="absolute right-6 top-1/2 -translate-y-1/2 aurora-gradient text-white p-4 rounded-full shadow-lg hover:scale-110 transition-all z-10"
+                className="absolute right-6 top-1/2 -translate-y-1/2 bg-gradient-to-r from-fuchsia-500 via-purple-700 to-fuchsia-500 text-white p-4 rounded-full shadow-lg hover:scale-110 transition-all z-10 border-2 border-purple-700"
                 aria-label="Siguiente imagen"
               >
                 <ChevronRight size={32} />
@@ -510,8 +509,8 @@ export function AuroraGallery() {
                     onClick={() => goToSlide(index)}
                     className={`
                       h-3 rounded-full transition-all
-                      ${index === currentIndex ? 'bg-aurora-tertiary w-8' : 'bg-white/50 w-3'}
-                      ${favoriteImage === index ? 'ring-2 ring-aurora-tertiary ring-offset-2 ring-offset-black/30' : ''}
+                      ${index === currentIndex ? 'bg-fuchsia-500 w-8' : 'bg-purple-700/30 w-3'}
+                      ${favoriteImage === index ? 'ring-2 ring-fuchsia-500 ring-offset-2 ring-offset-black/30' : ''}
                     `}
                     aria-label={`Ir a imagen ${index + 1}`}
                   />

@@ -78,7 +78,7 @@ export function AuroraEventDetails() {
       <div className="absolute inset-0 bg-gradient-to-b from-white/95 via-white/85 to-white/95 backdrop-blur-lg z-5"></div>
 
       {/* Elementos decorativos flotantes - FASE 3: Fortalecidos */}
-      <div className="absolute top-20 left-[10%] w-8 h-8 text-aurora-tertiary opacity-70 animate-pulse-slow z-5 drop-shadow-[0_2px_8px_rgba(180,80,255,0.25)]">
+    <div className="absolute top-20 left-[10%] w-8 h-8 text-fuchsia-500 opacity-70 animate-pulse-slow z-5 drop-shadow-[0_2px_8px_rgba(180,80,255,0.25)]">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M12 2L15 6L19 7L17 11L19 15L15 16L12 20L9 16L5 15L7 11L5 7L9 6L12 2Z"
@@ -91,7 +91,7 @@ export function AuroraEventDetails() {
       </div>
 
       <div
-        className="absolute top-32 right-[15%] w-10 h-10 text-aurora-tertiary opacity-70 animate-pulse-slow z-5 drop-shadow-[0_2px_8px_rgba(180,80,255,0.25)]"
+    className="absolute top-32 right-[15%] w-10 h-10 text-purple-700 opacity-70 animate-pulse-slow z-5 drop-shadow-[0_2px_8px_rgba(180,80,255,0.25)]"
         style={{ animationDelay: "1s" }}
       >
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -106,7 +106,7 @@ export function AuroraEventDetails() {
       </div>
 
       <div
-        className="absolute bottom-24 left-[20%] w-6 h-6 text-aurora-tertiary opacity-70 animate-pulse-slow z-5 drop-shadow-[0_2px_8px_rgba(180,80,255,0.25)]"
+    className="absolute bottom-24 left-[20%] w-6 h-6 text-fuchsia-500 opacity-70 animate-pulse-slow z-5 drop-shadow-[0_2px_8px_rgba(180,80,255,0.25)]"
         style={{ animationDelay: "2s" }}
       >
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -124,30 +124,30 @@ export function AuroraEventDetails() {
       <div ref={ref} className="relative z-10 max-w-6xl mx-auto text-center opacity-100 translate-y-0">
         {/* Header con estilo Aurora */}
         <div className="mb-12">
-          {/* Badge y Header - FASE 2: Intensificados */}
-          <div className="inline-block bg-gradient-to-r from-aurora-primary via-aurora-secondary to-aurora-tertiary text-white px-7 py-4 rounded-full text-base font-semibold mb-6 shadow-xl border-2 border-aurora-primary/60 aurora-shadow ring-2 ring-aurora-primary/30">
-            ✨ Detalles Mágicos del Evento
-          </div>
+            {/* Badge y Header - FASE 1: Morado y Fucsia vibrantes */}
+            <div className="inline-block bg-gradient-to-r from-purple-700 via-fuchsia-500 to-purple-700 text-white px-7 py-4 rounded-full text-base font-semibold mb-6 shadow-xl border-2 border-fuchsia-500 aurora-shadow ring-2 ring-purple-700/40">
+              <span className="drop-shadow-[0_2px_8px_rgba(180,80,255,0.25)]">✨ Detalles Mágicos del Evento</span>
+            </div>
 
-          <h2 className="text-4xl md:text-5xl font-princess aurora-text-gradient font-bold mb-6 drop-shadow-[0_2px_6px_rgba(180,80,255,0.25)]">
-            ¡Lo que Tienes que Saber!
-          </h2>
+            <h2 className="text-4xl md:text-5xl font-princess bg-gradient-to-r from-purple-700 via-fuchsia-500 to-purple-700 bg-clip-text text-transparent font-bold mb-6 drop-shadow-[0_2px_6px_rgba(180,80,255,0.25)]">
+              ¡Lo que Tienes que Saber!
+            </h2>
 
-          <p className="text-xl text-gray-800 mb-4 font-medium">
-            Todos los detalles importantes para acompañarme en mi día especial
-          </p>
+            <p className="text-xl text-fuchsia-700 mb-4 font-medium">
+              Todos los detalles importantes para acompañarme en mi día especial
+            </p>
         </div>
 
         {/* Separador decorativo estilo Aurora */}
         <div className="flex items-center justify-center my-8">
-          <div className="w-20 h-1 bg-gradient-to-r from-transparent via-aurora-tertiary to-transparent rounded-full"></div>
+            <div className="w-20 h-1 bg-gradient-to-r from-transparent via-fuchsia-500 to-transparent rounded-full"></div>
           <div className="mx-4 relative">
-            <div className="w-10 h-10 bg-gradient-to-r from-aurora-primary via-aurora-secondary to-aurora-tertiary rounded-full flex items-center justify-center shadow-xl ring-2 ring-aurora-primary/40 animate-pulse-slow">
-              <Sparkles className="w-5 h-5 text-white drop-shadow-[0_2px_8px_rgba(180,80,255,0.25)]" />
-            </div>
-            <div className="absolute inset-0 aurora-shimmer rounded-full"></div>
+              <div className="w-10 h-10 bg-gradient-to-r from-purple-700 via-fuchsia-500 to-purple-700 rounded-full flex items-center justify-center shadow-xl ring-2 ring-fuchsia-500/40 animate-pulse-slow">
+                <Sparkles className="w-5 h-5 text-white drop-shadow-[0_2px_8px_rgba(180,80,255,0.25)]" />
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-700 via-fuchsia-500 to-purple-700 opacity-30 rounded-full"></div>
           </div>
-          <div className="w-20 h-1 bg-gradient-to-r from-transparent via-aurora-tertiary to-transparent rounded-full"></div>
+            <div className="w-20 h-1 bg-gradient-to-r from-transparent via-fuchsia-500 to-transparent rounded-full"></div>
         </div>
 
         {/* Fecha principal destacada */}
@@ -172,15 +172,15 @@ export function AuroraEventDetails() {
           {/* Ceremonia */}
           <div
             data-testid="ceremony-section"
-            className="bg-white/98 backdrop-blur-lg rounded-2xl p-10 border-2 border-aurora-primary/50 shadow-2xl ring-2 ring-aurora-primary/30 hover:shadow-2xl transition-all duration-300 relative overflow-hidden group"
+              className="bg-white/98 backdrop-blur-lg rounded-2xl p-10 border-2 border-fuchsia-500 shadow-2xl ring-2 ring-purple-700/30 hover:shadow-fuchsia-500/40 transition-all duration-300 relative overflow-hidden group"
           >
             <div className="absolute inset-0 aurora-shimmer opacity-20 group-hover:opacity-30 transition-opacity duration-300"></div>
 
             {/* Icono decorativo */}
             <div className="relative z-10 flex justify-center mb-6">
-              <div className="w-16 h-16 bg-gradient-to-r from-aurora-primary via-aurora-secondary to-aurora-tertiary rounded-full flex items-center justify-center shadow-xl ring-2 ring-aurora-primary/40 animate-pulse-slow">
+                <div className="w-16 h-16 bg-gradient-to-r from-purple-700 via-fuchsia-500 to-purple-700 rounded-full flex items-center justify-center shadow-xl ring-2 ring-fuchsia-500/40 animate-pulse-slow">
                 <svg
-                  className="w-8 h-8 text-white drop-shadow-[0_2px_8px_rgba(180,80,255,0.25)]"
+                  className="w-8 h-8 text-fuchsia-500 drop-shadow-[0_2px_8px_rgba(180,80,255,0.25)]"
                   viewBox="0 0 24 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -190,11 +190,11 @@ export function AuroraEventDetails() {
               </div>
             </div>
 
-            <h3 className="text-xl font-princess aurora-text-gradient font-bold mb-4">Ceremonia Religiosa</h3>
+            <h3 className="text-xl font-princess bg-gradient-to-r from-purple-700 via-fuchsia-500 to-purple-700 bg-clip-text text-transparent font-bold mb-4">Ceremonia Religiosa</h3>
 
             <div className="space-y-4 text-left">
               <div className="flex items-center gap-3">
-                <Clock className="w-5 h-5 text-aurora-secondary flex-shrink-0" />
+                  <Clock className="w-5 h-5 text-fuchsia-500 flex-shrink-0" />
                 <div>
                   <p className="font-bold text-gray-900">{auroraDemoData.event.ceremony.time}</p>
                   <p className="text-sm text-gray-700 font-medium">Misa de Acción de Gracias</p>
@@ -202,7 +202,7 @@ export function AuroraEventDetails() {
               </div>
 
               <div className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-aurora-secondary flex-shrink-0 mt-1" />
+                  <MapPin className="w-5 h-5 text-purple-700 flex-shrink-0 mt-1" />
                 <div>
                   <p className="font-bold text-gray-900">{auroraDemoData.event.ceremony.venue}</p>
                   <p className="text-sm text-gray-700 font-medium leading-relaxed">
@@ -213,8 +213,8 @@ export function AuroraEventDetails() {
             </div>
 
             <Button
-              variant="outline"
-              className="w-full mt-6 border-2 border-aurora-primary text-aurora-primary hover:bg-aurora-primary hover:text-white hover:shadow-xl transition-all duration-300 font-semibold bg-white/90 relative z-20"
+                variant="outline"
+                className="w-full mt-6 border-2 border-fuchsia-500 text-purple-700 hover:bg-fuchsia-500 hover:text-white hover:shadow-fuchsia-500/40 transition-all duration-300 font-semibold bg-white/90 relative z-20"
               onClick={(e) => {
                 e.preventDefault()
                 e.stopPropagation()
@@ -222,23 +222,23 @@ export function AuroraEventDetails() {
               }}
             >
               <MapPin className="w-4 h-4 mr-2 drop-shadow-[0_2px_6px_rgba(180,80,255,0.18)]" />
-              Ver en Google Maps
-              <ExternalLink className="w-3 h-3 ml-2" />
+                Ver en Google Maps
+                <ExternalLink className="w-3 h-3 ml-2 text-fuchsia-500 group-hover:text-white transition-colors duration-300" />
             </Button>
           </div>
 
           {/* Recepción */}
           <div
             data-testid="party-section"
-            className="bg-white/98 backdrop-blur-lg rounded-2xl p-10 border-2 border-aurora-primary/50 shadow-2xl ring-2 ring-aurora-primary/30 hover:shadow-2xl transition-all duration-300 relative overflow-hidden group"
+              className="bg-white/98 backdrop-blur-lg rounded-2xl p-10 border-2 border-purple-700 shadow-2xl ring-2 ring-fuchsia-500/30 hover:shadow-purple-700/40 transition-all duration-300 relative overflow-hidden group"
           >
             <div className="absolute inset-0 aurora-shimmer opacity-20 group-hover:opacity-30 transition-opacity duration-300"></div>
 
             {/* Icono decorativo */}
             <div className="relative z-10 flex justify-center mb-6">
-              <div className="w-16 h-16 bg-gradient-to-r from-aurora-primary via-aurora-secondary to-aurora-tertiary rounded-full flex items-center justify-center shadow-xl ring-2 ring-aurora-primary/40 animate-pulse-slow">
+                <div className="w-16 h-16 bg-gradient-to-r from-fuchsia-500 via-purple-700 to-fuchsia-500 rounded-full flex items-center justify-center shadow-xl ring-2 ring-purple-700/40 animate-pulse-slow">
                 <svg
-                  className="w-8 h-8 text-white drop-shadow-[0_2px_8px_rgba(180,80,255,0.25)]"
+                  className="w-8 h-8 text-purple-700 drop-shadow-[0_2px_8px_rgba(180,80,255,0.25)]"
                   viewBox="0 0 24 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -248,11 +248,11 @@ export function AuroraEventDetails() {
               </div>
             </div>
 
-            <h3 className="text-xl font-princess aurora-text-gradient font-bold mb-4">Recepción</h3>
+            <h3 className="text-xl font-princess bg-gradient-to-r from-fuchsia-500 via-purple-700 to-fuchsia-500 bg-clip-text text-transparent font-bold mb-4">Recepción</h3>
 
             <div className="space-y-4 text-left">
               <div className="flex items-center gap-3">
-                <Clock className="w-5 h-5 text-aurora-secondary flex-shrink-0" />
+                  <Clock className="w-5 h-5 text-purple-700 flex-shrink-0" />
                 <div>
                   <p className="font-bold text-gray-900">{auroraDemoData.event.party.time}</p>
                   <p className="text-sm text-gray-700 font-medium">Celebración y Fiesta</p>
@@ -260,7 +260,7 @@ export function AuroraEventDetails() {
               </div>
 
               <div className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-aurora-secondary flex-shrink-0 mt-1" />
+                  <MapPin className="w-5 h-5 text-fuchsia-500 flex-shrink-0 mt-1" />
                 <div>
                   <p className="font-bold text-gray-900">{auroraDemoData.event.party.venue}</p>
                   <p className="text-sm text-gray-700 font-medium leading-relaxed">
@@ -271,8 +271,8 @@ export function AuroraEventDetails() {
             </div>
 
             <Button
-              variant="outline"
-              className="w-full mt-6 border-2 border-aurora-primary text-aurora-primary hover:bg-aurora-primary hover:text-white hover:shadow-xl transition-all duration-300 font-semibold bg-white/90 relative z-20"
+                variant="outline"
+                className="w-full mt-6 border-2 border-purple-700 text-fuchsia-500 hover:bg-purple-700 hover:text-white hover:shadow-purple-700/40 transition-all duration-300 font-semibold bg-white/90 relative z-20"
               onClick={(e) => {
                 e.preventDefault()
                 e.stopPropagation()
@@ -280,31 +280,31 @@ export function AuroraEventDetails() {
               }}
             >
               <MapPin className="w-4 h-4 mr-2 drop-shadow-[0_2px_6px_rgba(180,80,255,0.18)]" />
-              Ver en Google Maps
-              <ExternalLink className="w-3 h-3 ml-2" />
+                Ver en Google Maps
+                <ExternalLink className="w-3 h-3 ml-2 text-purple-700 group-hover:text-white transition-colors duration-300" />
             </Button>
           </div>
 
           {/* Código de Vestimenta */}
-          <div className="bg-white/98 backdrop-blur-lg rounded-2xl p-10 border-2 border-aurora-primary/50 shadow-2xl ring-2 ring-aurora-primary/30 hover:shadow-2xl transition-all duration-300 relative overflow-hidden group md:col-span-2 lg:col-span-1">
+            <div className="bg-white/98 backdrop-blur-lg rounded-2xl p-10 border-2 border-fuchsia-500 shadow-2xl ring-2 ring-purple-700/30 hover:shadow-fuchsia-500/40 transition-all duration-300 relative overflow-hidden group md:col-span-2 lg:col-span-1">
             <div className="absolute inset-0 aurora-shimmer opacity-20 group-hover:opacity-30 transition-opacity duration-300"></div>
 
             {/* Icono decorativo */}
             <div className="relative z-10 flex justify-center mb-6">
-              <div className="w-16 h-16 aurora-gradient rounded-full flex items-center justify-center shadow-lg">
-                <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 2L15 6L19 7L17 11L19 15L15 16L12 20L9 16L5 15L7 11L5 7L9 6L12 2Z" fill="currentColor" />
-                </svg>
+                <div className="w-16 h-16 bg-gradient-to-r from-fuchsia-500 via-purple-700 to-fuchsia-500 rounded-full flex items-center justify-center shadow-lg">
+                  <svg className="w-8 h-8 text-fuchsia-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L15 6L19 7L17 11L19 15L15 16L12 20L9 16L5 15L7 11L5 7L9 6L12 2Z" fill="currentColor" />
+                  </svg>
               </div>
             </div>
 
-            <h3 className="text-xl font-princess aurora-text-gradient font-bold mb-4">Código de Vestimenta</h3>
+            <h3 className="text-xl font-princess bg-gradient-to-r from-fuchsia-500 via-purple-700 to-fuchsia-500 bg-clip-text text-transparent font-bold mb-4">Código de Vestimenta</h3>
 
             <div className="space-y-4">
               <div className="text-center">
                 <p className="text-lg font-bold text-gray-900 mb-2">{auroraDemoData.event.dressCode}</p>
                 <div className="bg-aurora-accent/20 rounded-lg p-4 border border-aurora-tertiary/30">
-                  <p className="text-sm text-gray-800 font-semibold leading-relaxed">
+                    <p className="text-sm text-purple-700 font-semibold leading-relaxed">
                     <strong>Importante:</strong> Rosa Gold es un color exclusivo para la quinceañera. Les agradecemos
                     respetar esta tradición especial.
                   </p>
@@ -315,20 +315,20 @@ export function AuroraEventDetails() {
         </div>
 
         {/* Información adicional */}
-        <div className="mt-12 bg-white/98 backdrop-blur-lg rounded-2xl p-10 border-2 border-aurora-primary/50 shadow-2xl ring-2 ring-aurora-primary/30 relative overflow-hidden">
+          <div className="mt-12 bg-white/98 backdrop-blur-lg rounded-2xl p-10 border-2 border-fuchsia-500 shadow-2xl ring-2 ring-purple-700/30 relative overflow-hidden">
           <div className="absolute inset-0 aurora-shimmer opacity-25"></div>
 
           <div className="relative z-10">
-            <h3 className="text-2xl font-princess aurora-text-gradient font-bold mb-6 drop-shadow-[0_2px_6px_rgba(180,80,255,0.18)]">
-              Información Importante
-            </h3>
+              <h3 className="text-2xl font-princess bg-gradient-to-r from-purple-700 via-fuchsia-500 to-purple-700 bg-clip-text text-transparent font-bold mb-6 drop-shadow-[0_2px_6px_rgba(180,80,255,0.18)]">
+                Información Importante
+              </h3>
 
             <div className="grid md:grid-cols-2 gap-6 text-left">
               <div className="space-y-3">
-                <h4 className="font-bold text-aurora-primary mb-3 flex items-center gap-2">
-                  <Sparkles className="w-5 h-5 drop-shadow-[0_2px_6px_rgba(180,80,255,0.18)]" />
-                  Antes del Evento
-                </h4>
+                  <h4 className="font-bold text-fuchsia-500 mb-3 flex items-center gap-2">
+                    <Sparkles className="w-5 h-5 text-purple-700 drop-shadow-[0_2px_6px_rgba(180,80,255,0.18)]" />
+                    Antes del Evento
+                  </h4>
                 <ul className="space-y-2 text-gray-900 font-semibold">
                   <li>• Confirmar asistencia con anticipación</li>
                   <li>• Llegar 30 minutos antes a la ceremonia</li>
@@ -338,10 +338,10 @@ export function AuroraEventDetails() {
               </div>
 
               <div className="space-y-3">
-                <h4 className="font-bold text-aurora-primary mb-3 flex items-center gap-2">
-                  <Sparkles className="w-5 h-5 drop-shadow-[0_2px_6px_rgba(180,80,255,0.18)]" />
-                  Durante la Celebración
-                </h4>
+                  <h4 className="font-bold text-purple-700 mb-3 flex items-center gap-2">
+                    <Sparkles className="w-5 h-5 text-fuchsia-500 drop-shadow-[0_2px_6px_rgba(180,80,255,0.18)]" />
+                    Durante la Celebración
+                  </h4>
                 <ul className="space-y-2 text-gray-900 font-semibold">
                   <li>• Estacionamiento gratuito disponible</li>
                   <li>• Cena y baile en la recepción</li>
