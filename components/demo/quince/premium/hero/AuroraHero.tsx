@@ -170,7 +170,7 @@ export const AuroraHero: React.FC<AuroraHeroProps> = ({ data }) => {
           </h1>
           
           <h2 
-            className={`${heroStyles.subtitleFont} text-fuchsia-400 text-3xl md:text-4xl animate-fade-in-delay`}
+            className={`${heroStyles.subtitleFont} text-pink-600 text-3xl md:text-4xl animate-fade-in-delay`}
           >
             {data.hero.subtitle}
           </h2>
