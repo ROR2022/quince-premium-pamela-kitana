@@ -1,108 +1,87 @@
 'use client'
 
 import { useState, useRef, useEffect, useCallback } from 'react'
-import { useInView } from 'framer-motion'
-import { ChevronLeft, ChevronRight, X } from 'lucide-react'
+import { useInView, motion, AnimatePresence } from 'framer-motion'
+import { ChevronLeft, ChevronRight, X, Crown, Heart, Sparkles } from 'lucide-react'
 import Image from 'next/image'
 import { useIsClient } from "@/hooks/useIsClient"
 import { auroraDemoData } from "../data/aurora-demo-data"
 
-// Tipos para TypeScript
-interface GalleryImage {
+// Tipos simplificados para quinceañera
+interface QuinceaneraImage {
   src: string
   alt: string
   caption: string
   category?: string
 }
 
-interface CategoryData {
-  title: string
-  icon: string
-  description: string
-  images: GalleryImage[]
-}
-
-interface Categories {
-  [key: string]: CategoryData
-}
-
 export function AuroraGallery() {
-  // Estados para manejo de categorías
-  const [activeCategory, setActiveCategory] = useState<string>("Quinceañera")
-  const [categoryIndexes, setCategoryIndexes] = useState<Record<string, number>>({
-    "Quinceañera": 0,
-    "Familia": 0,
-    "Chambelanes": 0
-  })
-  const [isTransitioning, setIsTransitioning] = useState(false)
+  // Estados simplificados - solo para quinceañera
+  const [currentIndex, setCurrentIndex] = useState(0)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isAutoPlaying, setIsAutoPlaying] = useState(false)
+  const [favoriteImage, setFavoriteImage] = useState<number | null>(null)
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, amount: 0.3 })
   const isClient = useIsClient()
 
-  // Obtener categorías y datos
-  const categories = auroraDemoData.gallery.categories as Categories
+  // Solo imágenes de quinceañera
+  const images: QuinceaneraImage[] = auroraDemoData.gallery.categories.Quinceañera.images
+  const totalImages = images.length
 
-  // Funciones helper para manejo de categorías
-  const getCurrentImages = useCallback((): GalleryImage[] => {
-    return categories[activeCategory]?.images || []
-  }, [categories, activeCategory])
-
-  const getCurrentIndex = useCallback((): number => {
-    return categoryIndexes[activeCategory] || 0
-  }, [categoryIndexes, activeCategory])
-
-  const setCurrentIndex = useCallback((index: number) => {
-    setCategoryIndexes(prev => ({
-      ...prev,
-      [activeCategory]: index
-    }))
-  }, [activeCategory, setCategoryIndexes])
-
-  const switchCategory = useCallback((category: string) => {
-    if (category !== activeCategory && categories[category]) {
-      setIsTransitioning(true)
-      setTimeout(() => {
-        setActiveCategory(category)
-        setIsTransitioning(false)
-      }, 150)
-    }
-  }, [activeCategory, categories, setIsTransitioning, setActiveCategory])
-
-  // Variables derivadas
-  const images = getCurrentImages()
-  const currentIndex = getCurrentIndex()
-
+  // Navegación simplificada
   const goToPrevious = useCallback(() => {
     if (!isClient) return
     const isFirstSlide = currentIndex === 0
-    const newIndex = isFirstSlide ? images.length - 1 : currentIndex - 1
+    const newIndex = isFirstSlide ? totalImages - 1 : currentIndex - 1
     setCurrentIndex(newIndex)
-  }, [currentIndex, isClient, images.length, setCurrentIndex])
+  }, [currentIndex, isClient, totalImages])
 
   const goToNext = useCallback(() => {
     if (!isClient) return
-    const isLastSlide = currentIndex === images.length - 1
+    const isLastSlide = currentIndex === totalImages - 1
     const newIndex = isLastSlide ? 0 : currentIndex + 1
     setCurrentIndex(newIndex)
-  }, [currentIndex, isClient, images.length, setCurrentIndex])
+  }, [currentIndex, isClient, totalImages])
 
-  const goToSlide = (slideIndex: number) => {
+  const goToSlide = useCallback((slideIndex: number) => {
     if (!isClient) return
     setCurrentIndex(slideIndex)
-  }
+  }, [isClient])
 
-  const openModal = () => {
+  const openModal = useCallback(() => {
     if (!isClient) return
     setIsModalOpen(true)
-  }
+    setIsAutoPlaying(false)
+  }, [isClient])
 
   const closeModal = useCallback(() => {
     if (!isClient) return
     setIsModalOpen(false)
   }, [isClient])
 
-  // Event listeners solo en cliente
+  const toggleFavorite = useCallback((index: number) => {
+    if (!isClient) return
+    setFavoriteImage(favoriteImage === index ? null : index)
+  }, [isClient, favoriteImage])
+
+  const toggleAutoPlay = useCallback(() => {
+    if (!isClient) return
+    setIsAutoPlaying(!isAutoPlaying)
+  }, [isClient, isAutoPlaying])
+
+  // Auto-play functionality
+  useEffect(() => {
+    if (!isClient || !isAutoPlaying || isModalOpen) return
+
+    const interval = setInterval(() => {
+      goToNext()
+    }, 4000)
+
+    return () => clearInterval(interval)
+  }, [isClient, isAutoPlaying, isModalOpen, goToNext])
+
+  // Keyboard navigation
   useEffect(() => {
     if (!isClient) return
 
@@ -113,15 +92,15 @@ export function AuroraGallery() {
         goToNext()
       } else if (e.key === 'Escape' && isModalOpen) {
         closeModal()
+      } else if (e.key === ' ' && !isModalOpen) {
+        e.preventDefault()
+        toggleAutoPlay()
       }
     }
 
     window.addEventListener('keydown', handleKeyDown)
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown)
-    }
-  }, [currentIndex, isModalOpen, goToNext, goToPrevious, closeModal, isClient])
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [isClient, isModalOpen, goToPrevious, goToNext, closeModal, toggleAutoPlay])
 
   return (
     <section className="relative py-16 px-4 min-h-screen">
@@ -141,136 +120,132 @@ export function AuroraGallery() {
       {/* Contenido principal */}
       <div
         ref={ref}
-        className={`relative z-10 max-w-4xl mx-auto text-center transition-all duration-1000 ${
+        className={`relative z-10 max-w-5xl mx-auto text-center transition-all duration-1000 ${
           isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}
       >
-        {/* Header con estilo Aurora */}
-        <div className="mb-12">
-          <div className="inline-block aurora-gradient text-white px-4 py-2 rounded-full text-sm font-medium mb-6 shadow-lg border border-aurora-tertiary/30 aurora-shadow">
-            📸 Recuerdos de Princesa
+        {/* Header Premium de Quinceañera */}
+        <motion.div 
+          className="mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
+          <div className="inline-flex items-center gap-2 aurora-gradient text-white px-6 py-3 rounded-full text-sm font-medium mb-6 shadow-lg border border-aurora-tertiary/30 aurora-shadow">
+            <Crown size={18} />
+            <span>Galería Real de Pamela Kitana</span>
+            <Sparkles size={16} />
           </div>
           
-          <h2 className="text-3xl md:text-4xl font-princess aurora-text-gradient mb-4">
-            {auroraDemoData.gallery.title}
+          <h2 className="text-4xl md:text-5xl font-princess aurora-text-gradient mb-4">
+            Momentos de Princesa
           </h2>
-          <p className="text-xl text-aurora-secondary mb-2">
-            {auroraDemoData.gallery.subtitle}
+          <p className="text-xl md:text-2xl text-aurora-secondary mb-3 font-medium">
+            {totalImages} Recuerdos Mágicos
           </p>
-          <p className="text-aurora-700 max-w-2xl mx-auto">
-            {auroraDemoData.gallery.description}
+          <p className="text-aurora-700 max-w-3xl mx-auto text-lg">
+            Una colección de momentos únicos e irrepetibles de nuestra quinceañera. 
+            Cada fotografía cuenta la historia de un sueño hecho realidad.
           </p>
-        </div>
+        </motion.div>
+
+        {/* Controles de Auto-play y Favoritos */}
+        {isClient && (
+          <motion.div 
+            className="flex flex-wrap justify-center gap-4 mb-8"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            <button
+              onClick={toggleAutoPlay}
+              className={`
+                flex items-center gap-2 px-4 py-2 rounded-full font-medium text-sm
+                transition-all duration-300 border-2 backdrop-blur-sm
+                ${isAutoPlaying 
+                  ? 'bg-aurora-primary text-white border-aurora-primary shadow-lg' 
+                  : 'bg-white/70 text-aurora-700 border-aurora-tertiary/50 hover:bg-aurora-primary/10'
+                }
+              `}
+            >
+              {isAutoPlaying ? '⏸️' : '▶️'}
+              <span>{isAutoPlaying ? 'Pausar' : 'Auto-play'}</span>
+            </button>
+            
+            {favoriteImage !== null && (
+              <div className="flex items-center gap-2 bg-aurora-tertiary/20 text-aurora-700 px-4 py-2 rounded-full text-sm backdrop-blur-sm border border-aurora-tertiary/30">
+                <Heart size={16} className="text-aurora-primary" />
+                <span>Foto favorita marcada</span>
+              </div>
+            )}
+          </motion.div>
+        )}
 
         {/* Separador decorativo estilo Aurora */}
-        <div className="flex items-center justify-center my-8">
-          <div className="w-12 h-px bg-gradient-to-r from-aurora-tertiary to-aurora-primary"></div>
-          <div className="mx-4 relative">
-            {/* Corona - símbolo de Aurora */}
-            <svg 
-              width="24" 
-              height="24" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              xmlns="http://www.w3.org/2000/svg"
-              className="text-aurora-primary"
-            >
-              <path 
-                d="M12 2L15 6L19 7L17 11L19 15L15 16L12 20L9 16L5 15L7 11L5 7L9 6L12 2Z" 
-                stroke="currentColor" 
-                strokeWidth="2" 
-              />
-            </svg>
+        <motion.div 
+          className="flex items-center justify-center my-8"
+          initial={{ opacity: 0, width: 0 }}
+          animate={isInView ? { opacity: 1, width: 'auto' } : { opacity: 0, width: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+        >
+          <div className="w-16 h-px bg-gradient-to-r from-aurora-tertiary to-aurora-primary"></div>
+          <div className="mx-6 relative">
+            <Crown size={28} className="text-aurora-primary" />
             <div className="absolute inset-0 aurora-shimmer rounded-full"></div>
           </div>
-          <div className="w-12 h-px bg-gradient-to-r from-aurora-primary to-aurora-tertiary"></div>
-        </div>
+          <div className="w-16 h-px bg-gradient-to-r from-aurora-primary to-aurora-tertiary"></div>
+        </motion.div>
 
-        {/* Filtros de Categorías */}
-        <div className="mt-8 mb-6">
-          <div className="flex flex-wrap justify-center gap-3 md:gap-4">
-            {Object.entries(categories).map(([categoryKey, categoryData]: [string, CategoryData]) => {
-              const isActive = activeCategory === categoryKey
-              const imageCount = categoryData.images?.length || 0
-              
-              return (
-                <button
-                  key={categoryKey}
-                  onClick={() => switchCategory(categoryKey)}
-                  disabled={isTransitioning}
-                  className={`
-                    group relative px-4 py-3 rounded-xl font-medium text-sm md:text-base
-                    transition-all duration-300 ease-out transform hover:scale-105
-                    border-2 backdrop-blur-sm
-                    ${isActive 
-                      ? 'bg-aurora-primary text-white border-aurora-primary shadow-lg shadow-aurora-primary/30' 
-                      : 'bg-white/70 text-aurora-700 border-aurora-tertiary/50 hover:bg-aurora-primary/10 hover:border-aurora-primary/60'
-                    }
-                    ${isTransitioning ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
-                  `}
-                >
-                  {/* Icono y texto */}
-                  <div className="flex items-center gap-2">
-                    <span className="text-lg">{categoryData.icon}</span>
-                    <span className="font-princess">{categoryData.title}</span>
-                    <span className={`
-                      text-xs px-2 py-1 rounded-full
-                      ${isActive 
-                        ? 'bg-white/20 text-white' 
-                        : 'bg-aurora-primary/10 text-aurora-primary group-hover:bg-aurora-primary/20'
-                      }
-                    `}>
-                      {imageCount}
-                    </span>
+        {/* Marco decorativo Premium para galería */}
+        <motion.div 
+          className="relative mt-8 border-4 border-aurora-tertiary/40 p-6 rounded-2xl bg-white/60 backdrop-blur-md shadow-2xl"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
+        >
+          {/* Decoraciones esquinas mejoradas */}
+          <div className="absolute top-0 left-0 w-12 h-12 border-t-4 border-l-4 border-aurora-primary -translate-x-2 -translate-y-2 rounded-tl-lg"></div>
+          <div className="absolute top-0 right-0 w-12 h-12 border-t-4 border-r-4 border-aurora-primary translate-x-2 -translate-y-2 rounded-tr-lg"></div>
+          <div className="absolute bottom-0 left-0 w-12 h-12 border-b-4 border-l-4 border-aurora-primary -translate-x-2 translate-y-2 rounded-bl-lg"></div>
+          <div className="absolute bottom-0 right-0 w-12 h-12 border-b-4 border-r-4 border-aurora-primary translate-x-2 translate-y-2 rounded-br-lg"></div>
+          
+          {/* Coronas decorativas en las esquinas */}
+          <Crown size={20} className="absolute top-2 left-2 text-aurora-primary" />
+          <Crown size={20} className="absolute top-2 right-2 text-aurora-primary" />
+          <Crown size={20} className="absolute bottom-2 left-2 text-aurora-primary" />
+          <Crown size={20} className="absolute bottom-2 right-2 text-aurora-primary" />
+          
+          {/* Galería principal optimizada */}
+          <div className="relative h-80 md:h-[500px] group">
+            <div className="w-full h-full flex justify-center">
+              <div className="relative w-full max-w-3xl h-full overflow-hidden rounded-2xl shadow-2xl border-4 border-white">
+                {/* Indicadores superiores mejorados */}
+                <div className="absolute top-4 left-4 right-4 flex justify-between items-center z-10">
+                  <div className="bg-aurora-primary/90 text-white px-4 py-2 rounded-full shadow-md text-sm backdrop-blur-sm font-medium">
+                    <span>Haz clic para ampliar</span>
                   </div>
                   
-                  {/* Efecto shimmer para categoría activa */}
-                  {isActive && (
-                    <div className="absolute inset-0 aurora-shimmer rounded-xl opacity-30"></div>
+                  {isClient && (
+                    <button
+                      onClick={() => toggleFavorite(currentIndex)}
+                      className={`
+                        p-2 rounded-full shadow-md transition-all backdrop-blur-sm
+                        ${favoriteImage === currentIndex 
+                          ? 'bg-aurora-primary text-white' 
+                          : 'bg-white/80 text-aurora-primary hover:bg-aurora-primary/10'
+                        }
+                      `}
+                      aria-label="Marcar como favorita"
+                    >
+                      <Heart size={18} fill={favoriteImage === currentIndex ? 'currentColor' : 'none'} />
+                    </button>
                   )}
-                  
-                  {/* Indicador de transición */}
-                  {isTransitioning && isActive && (
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                    </div>
-                  )}
-                </button>
-              )
-            })}
-          </div>
-          
-          {/* Descripción de categoría activa */}
-          <div className="mt-4 text-center">
-            <p className="text-aurora-600 text-sm md:text-base italic">
-              {categories[activeCategory]?.description}
-            </p>
-          </div>
-        </div>
-
-        {/* Marco decorativo de galería estilo Aurora */}
-        <div className="relative mt-8 border-4 border-aurora-tertiary/30 p-4 rounded-xl bg-white/50 backdrop-blur-sm">
-          {/* Decoraciones esquinas - estilo castillo/cuento de hadas */}
-          <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-aurora-primary -translate-x-1 -translate-y-1"></div>
-          <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-aurora-primary translate-x-1 -translate-y-1"></div>
-          <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-aurora-primary -translate-x-1 translate-y-1"></div>
-          <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-aurora-primary translate-x-1 translate-y-1"></div>
-          
-          {/* Galería principal */}
-          <div className="relative h-64 md:h-96 group">
-            <div className="w-full h-full flex justify-center">
-              <div className="relative w-full max-w-2xl h-full overflow-hidden rounded-xl shadow-xl border-4 border-white">
-                {/* Indicador para hacer clic */}
-                <div className="absolute top-4 right-4 bg-aurora-primary/80 text-white px-3 py-1 rounded-full shadow-md z-10 text-xs backdrop-blur-sm font-medium">
-                  <span>Haz clic para ampliar</span>
                 </div>
                 
-                {images.map((image: GalleryImage, index: number) => (
-                  <div
-                    key={index}
-                    className={`absolute top-0 left-0 w-full h-full transition-opacity duration-500 ${
-                      index === currentIndex ? 'opacity-100' : 'opacity-0'
-                    }`}
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentIndex}
+                    className="absolute top-0 left-0 w-full h-full cursor-pointer"
                     onClick={openModal}
                     onKeyDown={(e) => {
                       if (e.key === 'Enter' || e.key === ' ') {
@@ -280,32 +255,46 @@ export function AuroraGallery() {
                     }}
                     role="button"
                     tabIndex={isClient ? 0 : -1}
+                    initial={{ opacity: 0, scale: 1.05 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.5 }}
                   >
                     <Image
-                      src={image.src || '/placeholder.svg'}
-                      alt={image.alt}
+                      src={images[currentIndex]?.src || '/placeholder.svg'}
+                      alt={images[currentIndex]?.alt || 'Imagen de quinceañera'}
                       fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      className="object-cover object-top cursor-pointer transition-transform duration-300 group-hover:scale-105"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 60vw"
+                      className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                      priority={currentIndex <= 2}
                     />
                     
-                    {/* Caption overlay con estilo Aurora */}
-                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-aurora-primary/80 to-transparent p-4">
-                      <p className="text-white md:text-base font-medium font-princess text-lg">
-                        {image.caption}
+                    {/* Overlay gradiente mejorado */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-aurora-primary/60 via-transparent to-transparent pointer-events-none"></div>
+                    
+                    {/* Caption mejorado */}
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-aurora-primary/90 to-transparent p-6">
+                      <div className="flex items-center gap-2 mb-2">
+                        {favoriteImage === currentIndex && (
+                          <Heart size={20} className="text-white fill-white" />
+                        )}
+                        <Crown size={20} className="text-white" />
+                      </div>
+                      <p className="text-white text-lg md:text-xl font-medium font-princess">
+                        {images[currentIndex]?.caption || 'Momento especial'}
                       </p>
                     </div>
-                  </div>
-                ))}
+                  </motion.div>
+                </AnimatePresence>
               </div>
             </div>
 
-            {/* Navigation buttons - solo mostrar en cliente */}
+            {/* Botones de navegación mejorados */}
             {isClient && (
               <>
                 <button
                   onClick={goToPrevious}
-                  className="absolute left-2 top-1/2 -translate-y-1/2 aurora-gradient text-white p-3 rounded-full shadow-md hover:opacity-90 transition-all z-10 aurora-shadow"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 aurora-gradient text-white p-4 rounded-full shadow-lg hover:scale-110 transition-all z-10 aurora-shadow"
                   aria-label="Imagen anterior"
                 >
                   <ChevronLeft size={24} />
@@ -313,119 +302,224 @@ export function AuroraGallery() {
 
                 <button
                   onClick={goToNext}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 aurora-gradient text-white p-3 rounded-full shadow-md hover:opacity-90 transition-all z-10 aurora-shadow"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 aurora-gradient text-white p-4 rounded-full shadow-lg hover:scale-110 transition-all z-10 aurora-shadow"
                   aria-label="Siguiente imagen"
                 >
                   <ChevronRight size={24} />
                 </button>
               </>
             )}
+          </div>
 
-            {/* Contador de categoría y posición */}
-            {isClient && (
-              <div className="absolute -bottom-16 left-0 right-0 flex justify-center">
-                <div className="bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-md border border-aurora-tertiary/30">
-                  <div className="flex items-center gap-2 text-sm">
-                    <span className="text-lg">{categories[activeCategory]?.icon}</span>
-                    <span className="font-medium text-aurora-700">
-                      {categories[activeCategory]?.title}
-                    </span>
-                    <span className="text-aurora-500">•</span>
-                    <span className="text-aurora-600">
-                      {currentIndex + 1} de {images.length}
-                    </span>
-                  </div>
+          {/* Contador mejorado */}
+          {isClient && (
+            <motion.div 
+              className="mt-6 flex justify-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 1 }}
+            >
+              <div className="bg-white/90 backdrop-blur-sm px-6 py-3 rounded-full shadow-lg border border-aurora-tertiary/30">
+                <div className="flex items-center gap-3 text-base">
+                  <Crown size={20} className="text-aurora-primary" />
+                  <span className="font-medium text-aurora-700">
+                    Foto {currentIndex + 1} de {totalImages}
+                  </span>
+                  {isAutoPlaying && (
+                    <>
+                      <span className="text-aurora-500">•</span>
+                      <span className="text-aurora-600 text-sm">Auto-play activo</span>
+                    </>
+                  )}
                 </div>
               </div>
-            )}
+            </motion.div>
+          )}
 
-            {/* Indicators - solo mostrar en cliente */}
-            {isClient && (
-              <div className="absolute -bottom-10 left-0 right-0 flex justify-center gap-2">
-                {images.map((_: GalleryImage, index: number) => (
-                  <button
-                    key={index}
-                    onClick={() => goToSlide(index)}
-                    className={`h-3 rounded-full transition-all ${
-                      index === currentIndex 
-                        ? 'bg-aurora-primary w-8' 
-                        : 'bg-aurora-tertiary/50 w-3 hover:bg-aurora-tertiary'
-                    }`}
-                    aria-label={`Ir a imagen ${index + 1}`}
-                  />
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Nota del tema Aurora */}
-        <div className="mt-12 p-4 bg-aurora-50/80 rounded-lg border border-aurora-tertiary/30 max-w-2xl mx-auto backdrop-blur-sm">
-          <p className="text-sm text-aurora-700">
-            👑 <strong>Tema Aurora:</strong> Galería de imágenes con estilo de cuento de hadas para tus momentos más mágicos.
-          </p>
-        </div>
-      </div>
-
-      {/* Modal - solo renderizar en cliente con estilo Aurora */}
-      {isClient && isModalOpen && (
-        <div className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4">
-          <div className="relative w-full max-w-5xl h-[80vh]">
-            <button
-              onClick={closeModal}
-              className="absolute right-2 top-2 aurora-gradient text-white p-2 rounded-full z-20 hover:opacity-90 transition-all"
-              aria-label="Cerrar modal"
-            >
-              <X size={24} />
-            </button>
-
-            <div className="relative w-full h-full">
-              <Image
-                src={images[currentIndex].src || '/placeholder.svg'}
-                alt={images[currentIndex].alt}
-                fill
-                sizes="100vw"
-                className="object-contain" 
-                priority
-              />
-              
-              {/* Caption en modal con estilo Aurora */}
-              <div className="absolute bottom-4 left-4 right-4 aurora-gradient/90 text-white p-4 rounded-lg shadow-lg">
-                <p className="font-medium font-princess text-xl">{images[currentIndex].caption}</p>
-                <p className="text-sm mt-1 text-white/80">{images[currentIndex].category && `Categoría: ${images[currentIndex].category}`}</p>
-              </div>
-            </div>
-
-            <button
-              onClick={goToPrevious}
-              className="absolute left-4 top-1/2 -translate-y-1/2 aurora-gradient text-white p-3 rounded-full shadow-md hover:opacity-90 transition-all z-10"
-              aria-label="Imagen anterior"
-            >
-              <ChevronLeft size={30} />
-            </button>
-
-            <button
-              onClick={goToNext}
-              className="absolute right-4 top-1/2 -translate-y-1/2 aurora-gradient text-white p-3 rounded-full shadow-md hover:opacity-90 transition-all z-10"
-              aria-label="Siguiente imagen"
-            >
-              <ChevronRight size={30} />
-            </button>
-
-            <div className="absolute bottom-20 left-1/2 -translate-x-1/2 flex gap-2">
-              {images.map((_: GalleryImage, index: number) => (
+          {/* Indicadores de navegación mejorados */}
+          {isClient && (
+            <div className="flex justify-center gap-2 mt-6 px-4 overflow-x-auto">
+              {images.map((_, index: number) => (
                 <button
                   key={index}
                   onClick={() => goToSlide(index)}
-                  className={`h-3 rounded-full transition-all ${
-                    index === currentIndex ? 'bg-aurora-tertiary w-8' : 'bg-white/50 w-3'
-                  }`}
+                  className={`
+                    h-3 rounded-full transition-all duration-300 flex-shrink-0
+                    ${index === currentIndex 
+                      ? 'bg-aurora-primary w-12 shadow-md' 
+                      : 'bg-aurora-tertiary/50 w-3 hover:bg-aurora-tertiary hover:w-6'
+                    }
+                    ${favoriteImage === index ? 'ring-2 ring-aurora-primary ring-offset-2' : ''}
+                  `}
                   aria-label={`Ir a imagen ${index + 1}`}
                 />
               ))}
             </div>
+          )}
+        </motion.div>
+
+        {/* Información adicional de quinceañera */}
+        <motion.div 
+          className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.8, delay: 1.2 }}
+        >
+          <div className="p-6 bg-aurora-50/80 rounded-xl border border-aurora-tertiary/30 backdrop-blur-sm text-center">
+            <Crown size={32} className="text-aurora-primary mx-auto mb-3" />
+            <h3 className="font-princess text-lg text-aurora-700 mb-2">Quinceañera</h3>
+            <p className="text-aurora-600 text-sm">Pamela Kitana</p>
           </div>
-        </div>
+          
+          <div className="p-6 bg-aurora-50/80 rounded-xl border border-aurora-tertiary/30 backdrop-blur-sm text-center">
+            <Sparkles size={32} className="text-aurora-primary mx-auto mb-3" />
+            <h3 className="font-princess text-lg text-aurora-700 mb-2">Momentos</h3>
+            <p className="text-aurora-600 text-sm">{totalImages} Recuerdos</p>
+          </div>
+          
+          <div className="p-6 bg-aurora-50/80 rounded-xl border border-aurora-tertiary/30 backdrop-blur-sm text-center">
+            <Heart size={32} className="text-aurora-primary mx-auto mb-3" />
+            <h3 className="font-princess text-lg text-aurora-700 mb-2">Tema</h3>
+            <p className="text-aurora-600 text-sm">Aurora Princess</p>
+          </div>
+        </motion.div>
+
+        {/* Nota del tema Aurora */}
+        <motion.div 
+          className="mt-12 p-6 bg-aurora-50/80 rounded-xl border border-aurora-tertiary/30 max-w-3xl mx-auto backdrop-blur-sm"
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ duration: 0.8, delay: 1.4 }}
+        >
+          <div className="flex items-center justify-center gap-2 mb-3">
+            <Crown size={24} className="text-aurora-primary" />
+            <span className="font-princess text-xl text-aurora-700">Galería Real</span>
+            <Crown size={24} className="text-aurora-primary" />
+          </div>
+          <p className="text-aurora-700 text-center">
+            Una colección exclusiva de momentos mágicos de nuestra quinceañera. 
+            Cada imagen ha sido cuidadosamente seleccionada para contar la historia 
+            de este día tan especial.
+          </p>
+        </motion.div>
+      </div>
+
+      {/* Modal mejorado con funcionalidades premium */}
+      {isClient && isModalOpen && (
+        <AnimatePresence>
+          <motion.div 
+            className="fixed inset-0 bg-black/95 flex items-center justify-center z-50 p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <motion.div 
+              className="relative w-full max-w-6xl h-[90vh]"
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              {/* Controles del modal */}
+              <div className="absolute right-4 top-4 flex gap-2 z-20">
+                <button
+                  onClick={() => toggleFavorite(currentIndex)}
+                  className={`
+                    p-3 rounded-full transition-all backdrop-blur-sm shadow-lg
+                    ${favoriteImage === currentIndex 
+                      ? 'bg-aurora-primary text-white' 
+                      : 'bg-white/20 text-white hover:bg-white/30'
+                    }
+                  `}
+                  aria-label="Marcar como favorita"
+                >
+                  <Heart size={20} fill={favoriteImage === currentIndex ? 'currentColor' : 'none'} />
+                </button>
+                
+                <button
+                  onClick={closeModal}
+                  className="aurora-gradient text-white p-3 rounded-full z-20 hover:scale-110 transition-all shadow-lg"
+                  aria-label="Cerrar modal"
+                >
+                  <X size={24} />
+                </button>
+              </div>
+
+              <div className="relative w-full h-full">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentIndex}
+                    className="absolute inset-0"
+                    initial={{ opacity: 0, x: 100 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -100 }}
+                    transition={{ duration: 0.4 }}
+                  >
+                    <Image
+                      src={images[currentIndex]?.src || '/placeholder.svg'}
+                      alt={images[currentIndex]?.alt || 'Imagen de quinceañera'}
+                      fill
+                      sizes="100vw"
+                      className="object-contain" 
+                      priority
+                    />
+                  </motion.div>
+                </AnimatePresence>
+                
+                {/* Caption en modal mejorado */}
+                <div className="absolute bottom-6 left-6 right-6 aurora-gradient/95 text-white p-6 rounded-xl shadow-2xl backdrop-blur-sm">
+                  <div className="flex items-center gap-3 mb-3">
+                    <Crown size={24} />
+                    {favoriteImage === currentIndex && (
+                      <Heart size={20} fill="currentColor" />
+                    )}
+                    <span className="font-princess text-lg">Pamela Kitana</span>
+                  </div>
+                  <p className="font-medium font-princess text-xl mb-2">
+                    {images[currentIndex]?.caption || 'Momento especial'}
+                  </p>
+                  <p className="text-sm text-white/90">
+                    Imagen {currentIndex + 1} de {totalImages} • Tema Aurora Princess
+                  </p>
+                </div>
+              </div>
+
+              {/* Navegación en modal */}
+              <button
+                onClick={goToPrevious}
+                className="absolute left-6 top-1/2 -translate-y-1/2 aurora-gradient text-white p-4 rounded-full shadow-lg hover:scale-110 transition-all z-10"
+                aria-label="Imagen anterior"
+              >
+                <ChevronLeft size={32} />
+              </button>
+
+              <button
+                onClick={goToNext}
+                className="absolute right-6 top-1/2 -translate-y-1/2 aurora-gradient text-white p-4 rounded-full shadow-lg hover:scale-110 transition-all z-10"
+                aria-label="Siguiente imagen"
+              >
+                <ChevronRight size={32} />
+              </button>
+
+              {/* Indicadores en modal */}
+              <div className="absolute bottom-24 left-1/2 -translate-x-1/2 flex gap-2 bg-black/30 p-3 rounded-full backdrop-blur-sm">
+                {images.map((_, index: number) => (
+                  <button
+                    key={index}
+                    onClick={() => goToSlide(index)}
+                    className={`
+                      h-3 rounded-full transition-all
+                      ${index === currentIndex ? 'bg-aurora-tertiary w-8' : 'bg-white/50 w-3'}
+                      ${favoriteImage === index ? 'ring-2 ring-aurora-tertiary ring-offset-2 ring-offset-black/30' : ''}
+                    `}
+                    aria-label={`Ir a imagen ${index + 1}`}
+                  />
+                ))}
+              </div>
+            </motion.div>
+          </motion.div>
+        </AnimatePresence>
       )}
     </section>
   )

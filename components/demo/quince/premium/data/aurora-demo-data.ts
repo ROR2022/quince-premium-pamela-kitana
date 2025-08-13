@@ -185,6 +185,24 @@ export const auroraDemoData = {
             alt: "Pamela Kitana - Momento especial 18",
             caption: "El brillo de una estrella",
             category: "Quinceañera"
+          },
+          {
+            src: "/images/custom/quinceañera/pamela_19.jpg",
+            alt: "Pamela Kitana - Momento especial 19",
+            caption: "La esencia de una princesa",
+            category: "Quinceañera"
+          },
+          {
+            src: "/images/custom/quinceañera/pamela_20.jpg",
+            alt: "Pamela Kitana - Momento especial 20",
+            caption: "La magia de ser princesa",
+            category: "Quinceañera"
+          },
+          {
+            src: "/images/custom/quinceañera/pamela_21.jpg",
+            alt: "Pamela Kitana - Momento especial 21",
+            caption: "El sueño de una noche mágica",
+            category: "Quinceañera"
           }
         ]
       },

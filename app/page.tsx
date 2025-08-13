@@ -8,6 +8,7 @@ import { AuroraGifts } from "@/components/demo/quince/premium/gifts/AuroraGifts"
 import { AuroraThankYou } from "@/components/demo/quince/premium/thankyou/AuroraThankYou";
 import { AuroraMusicPlayer } from "@/components/demo/quince/premium/AuroraMusicPlayer";
 import { auroraDemoData } from "@/components/demo/quince/premium/data/aurora-demo-data";
+import EspecialGallery from "@/components/demo/quince/premium/gallery/EspecialGallery";
 
 export default function LandingPage() {
   return (
@@ -23,7 +24,10 @@ export default function LandingPage() {
               
               {/* Detalles del evento con tema Aurora */}
               <AuroraEventDetails />
-              
+
+              {/** Galería especial por requerimiento del cliente */}
+              <EspecialGallery />
+
               {/* Galería con tema Aurora */}
               <AuroraGallery />
               
