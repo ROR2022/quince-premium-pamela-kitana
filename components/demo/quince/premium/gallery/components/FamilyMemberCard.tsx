@@ -12,6 +12,16 @@ import {
 } from '../animations/family-animations';
 
 const FamilyMemberCard: React.FC<FamilyMemberCardProps> = ({ member, index }) => {
+  // Configuración específica de imagen o valores por defecto
+  const imageConfig = member.imageConfig || {};
+  const objectPosition = imageConfig.objectPosition || 'center';
+  const mobileHeight = imageConfig.mobileHeight || 'h-40';
+  const desktopHeight = imageConfig.desktopHeight || 'lg:h-52';
+  
+  // Construir clases dinámicas para altura responsiva
+  // Esto permite ajustes específicos por imagen para evitar cortes en móvil
+  const heightClasses = `${mobileHeight} sm:h-44 md:h-48 ${desktopHeight}`;
+  
   return (
     <motion.div
       className="bg-white/98 backdrop-blur-md rounded-3xl p-4 md:p-6 lg:p-8 border-2 border-aurora-tertiary/40 shadow-2xl hover:shadow-aurora-primary/20 hover:shadow-2xl transition-all duration-500 w-full max-w-[280px] sm:max-w-[320px] md:max-w-xs group aurora-shimmer relative overflow-hidden"
@@ -44,9 +54,9 @@ const FamilyMemberCard: React.FC<FamilyMemberCardProps> = ({ member, index }) =>
         animate="animate"
       ></motion.div>
 
-      {/* Imagen del miembro - Altura responsiva */}
+      {/* Imagen del miembro - Altura responsiva con configuración específica */}
       <motion.div 
-        className="relative w-full h-40 sm:h-44 md:h-48 lg:h-52 rounded-2xl overflow-hidden mb-4 md:mb-6 group-hover:scale-105 transition-transform duration-500 shadow-lg"
+        className={`relative w-full rounded-2xl overflow-hidden mb-4 md:mb-6 group-hover:scale-105 transition-transform duration-500 shadow-lg ${heightClasses}`}
         whileHover={{ scale: 1.08, rotateY: 5 }}
         transition={{ duration: 0.4, type: "spring" }}
       >
@@ -62,6 +72,9 @@ const FamilyMemberCard: React.FC<FamilyMemberCardProps> = ({ member, index }) =>
           alt={member.name}
           fill
           className="object-cover filter group-hover:brightness-110 transition-all duration-500"
+          style={{ 
+            objectPosition: objectPosition, // Posicionamiento específico para evitar cortes
+          }}
           sizes="(max-width: 640px) 280px, (max-width: 768px) 320px, (max-width: 1024px) 360px, 400px"
           onError={(e) => {
             // Fallback en caso de error de imagen

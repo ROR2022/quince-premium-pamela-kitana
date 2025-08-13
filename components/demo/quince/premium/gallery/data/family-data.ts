@@ -16,7 +16,11 @@ const familyData: FamilyData = {
         name: "Liliana Robles Nicolás & David Ulister Gómez Villanueva",
         image: "/images/custom/familia/padres.jpg",
         role: "Mis Padres",
-        order: 1
+        order: 1,
+        imageConfig: {
+          objectPosition: "center", // Centrado para fotos de pareja
+          mobileHeight: "h-48", // Altura optimizada para fotos de dos personas
+        }
       }
     ]
   },
@@ -31,19 +35,30 @@ const familyData: FamilyData = {
         name: "Cristian",
         image: "/images/custom/chambelanes/hermano_cristian.jpg",
         role: "Hermano mayor",
-        order: 1
+        order: 1,
+        imageConfig: {
+          objectPosition: "center 30%", // Ajuste para retratos masculinos
+        }
       },
       {
         name: "Davne",
         image: "/images/custom/familia/hermana_davne.jpg", 
         role: "Hermana",
-        order: 2
+        order: 2,
+        imageConfig: {
+          objectPosition: "center 25%", // Ajuste específico para que el rostro se vea mejor
+          mobileHeight: "h-52", // Más altura en móvil para esta imagen específica
+          desktopHeight: "lg:h-60" // Altura específica en desktop
+        }
       },
       {
         name: "Raiza",
         image: "/images/custom/familia/hermana_raiza.jpg",
         role: "Hermana",
-        order: 3
+        order: 3,
+        imageConfig: {
+          objectPosition: "center 20%", // Similar ajuste para hermanas
+        }
       }
     ]
   },

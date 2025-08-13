@@ -3,11 +3,19 @@
  * Definiciones de tipos para la estructura de datos familiares
  */
 
+export interface ImageConfig {
+  objectPosition?: 'top' | 'center' | 'bottom' | 'left' | 'right' | string;
+  aspectRatio?: '1/1' | '3/4' | '4/3' | '16/9' | string;
+  mobileHeight?: string;
+  desktopHeight?: string;
+}
+
 export interface FamilyMember {
   name: string;
   image: string;
   role?: string;
   order?: number;
+  imageConfig?: ImageConfig;
 }
 
 export interface FamilySection {
