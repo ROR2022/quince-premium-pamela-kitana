@@ -164,13 +164,13 @@ export const AuroraHero: React.FC<AuroraHeroProps> = ({ data }) => {
           className={`${heroStyles.containerBackground} p-6 rounded-lg shadow-lg max-w-3xl mx-auto border border-aurora-tertiary/30`}
         >
           <h1 
-            className={`${heroStyles.nameFont} ${heroStyles.nameColor} text-5xl md:text-7xl font-bold mb-2 animate-fade-in`}
+            className={`${heroStyles.nameFont} text-fuchsia-500 text-5xl md:text-7xl font-bold mb-2 animate-fade-in`}
           >
             {data.hero.name}
           </h1>
           
           <h2 
-            className={`${heroStyles.subtitleFont} ${heroStyles.subtitleColor} text-3xl md:text-4xl animate-fade-in-delay`}
+            className={`${heroStyles.subtitleFont} text-fuchsia-400 text-3xl md:text-4xl animate-fade-in-delay`}
           >
             {data.hero.subtitle}
           </h2>
