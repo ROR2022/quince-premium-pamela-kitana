@@ -10,6 +10,9 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Textarea } from "@/components/ui/textarea"
 import { auroraDemoData } from "../data/aurora-demo-data"
 
+// Configuración del número de WhatsApp para confirmaciones
+const WHATSAPP_NUMBER = "528671544765" // Número de México con código de país
+
 export function AuroraAttendance() {
   const [formData, setFormData] = useState({
     name: "",
@@ -20,9 +23,46 @@ export function AuroraAttendance() {
   })
   
   const [formSubmitted, setFormSubmitted] = useState(false)
-  // Remove unused isClient variable
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, amount: 0.3 })
+  
+  // Función para generar el mensaje de WhatsApp
+  const generateWhatsAppMessage = (data: typeof formData) => {
+    const { name, response, companions, phone, message } = data
+    
+    let whatsappMessage = `🌟 *CONFIRMACIÓN QUINCEAÑERA PAMELA KITANA* 🌟\n\n`
+    whatsappMessage += `👤 *Nombre:* ${name}\n`
+    whatsappMessage += `📅 *Asistencia:* ${response === 'yes' ? '✅ SÍ asistiré' : '❌ NO podré asistir'}\n`
+    
+    if (response === 'yes') {
+      whatsappMessage += `📞 *Teléfono:* ${phone}\n`
+      
+      if (companions.trim()) {
+        whatsappMessage += `👥 *Acompañantes:* ${companions}\n`
+      }
+      
+      if (message.trim()) {
+        whatsappMessage += `💌 *Mensaje:* ${message}\n`
+      }
+    }
+    
+    whatsappMessage += `\n🎭 *Fecha del evento:* 11 de Octubre, 2025`
+    whatsappMessage += `\n👑 Enviado desde la invitación digital oficial`
+    
+    return encodeURIComponent(whatsappMessage)
+  }
+  
+  // Función para validar número de teléfono mexicano
+  const validateMexicanPhone = (phone: string): boolean => {
+    // Remover espacios, guiones y paréntesis
+    const cleanPhone = phone.replace(/[\s\-\(\)]/g, '')
+    
+    // Validar formato mexicano (10 dígitos)
+    const mexicanPhoneRegex = /^[0-9]{10}$/
+    
+    return mexicanPhoneRegex.test(cleanPhone)
+  }
   
   // Función para manejar cambios en el formulario
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -42,25 +82,54 @@ export function AuroraAttendance() {
   }
   
   // Función para manejar el envío del formulario
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // En un escenario real, aquí enviaríamos los datos a una API
-    console.log("Formulario enviado:", formData)
-    // Mostrar mensaje de confirmación
-    setFormSubmitted(true)
-    // Limpiar formulario
-    setFormData({
-      name: "",
-      response: "",
-      companions: "",
-      phone: "",
-      message: ""
-    })
+    setIsSubmitting(true)
     
-    // Después de 5 segundos, ocultar mensaje de confirmación
-    setTimeout(() => {
-      setFormSubmitted(false)
-    }, 5000)
+    try {
+      // Validaciones adicionales
+      if (formData.response === 'yes' && formData.phone && !validateMexicanPhone(formData.phone)) {
+        alert('Por favor ingresa un número de teléfono válido (10 dígitos)')
+        setIsSubmitting(false)
+        return
+      }
+      
+      // Generar mensaje de WhatsApp
+      const whatsappMessage = generateWhatsAppMessage(formData)
+      
+      // Crear URL de WhatsApp
+      const whatsappURL = `https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}`
+      
+      // Log para desarrollo (opcional)
+      console.log("Confirmación enviada:", formData)
+      console.log("URL de WhatsApp:", whatsappURL)
+      
+      // Abrir WhatsApp en nueva ventana
+      window.open(whatsappURL, '_blank')
+      
+      // Mostrar mensaje de confirmación
+      setFormSubmitted(true)
+      
+      // Limpiar formulario
+      setFormData({
+        name: "",
+        response: "",
+        companions: "",
+        phone: "",
+        message: ""
+      })
+      
+      // Después de 8 segundos, ocultar mensaje de confirmación
+      setTimeout(() => {
+        setFormSubmitted(false)
+      }, 8000)
+      
+    } catch (error) {
+      console.error('Error al procesar la confirmación:', error)
+      alert('Hubo un error al procesar tu confirmación. Por favor intenta de nuevo.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -152,9 +221,19 @@ export function AuroraAttendance() {
                   <path d="M20 6L9 17L4 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
-              <h3 className="font-princess text-3xl text-aurora-primary mb-2">¡Gracias!</h3>
-              <p className="text-aurora-secondary">Hemos recibido tu confirmación y contamos con tu presencia.</p>
-              <p className="text-gray-500 mt-4 text-sm">Este es un demo, en una invitación real la confirmación sería registrada.</p>
+              <h3 className="font-princess text-3xl text-aurora-primary mb-2">¡Perfecto!</h3>
+              <p className="text-aurora-secondary mb-4">Se ha abierto WhatsApp con tu confirmación.</p>
+              <div className="bg-aurora-50/50 p-4 rounded-lg border border-aurora-tertiary/30 mb-4">
+                <p className="text-sm text-aurora-700">
+                  📱 <strong>Siguiente paso:</strong> Envía el mensaje de WhatsApp que se generó automáticamente
+                </p>
+                <p className="text-xs text-gray-600 mt-2">
+                  Si no se abrió WhatsApp automáticamente, puedes enviarnos tu confirmación al <strong>867-154-4765</strong>
+                </p>
+              </div>
+              <p className="text-gray-500 text-sm">
+                💌 ¡Gracias por confirmar tu asistencia! Nos emociona tenerte en este día tan especial.
+              </p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-6 relative">
@@ -217,7 +296,7 @@ export function AuroraAttendance() {
                   {/* Campo de teléfono */}
                   <div>
                     <Label htmlFor="phone" className="text-aurora-secondary font-medium">
-                      Número de celular <span className="text-red-400">*</span>
+                      Número de celular (México) <span className="text-red-400">*</span>
                     </Label>
                     <Input 
                       type="tel"
@@ -225,10 +304,15 @@ export function AuroraAttendance() {
                       name="phone"
                       value={formData.phone}
                       onChange={handleChange}
-                      placeholder="Tu número de contacto"
+                      placeholder="5512345678 (10 dígitos)"
                       className="mt-1 border-aurora-tertiary/30 focus:border-aurora-primary focus:ring-aurora-primary/30"
+                      maxLength={10}
+                      pattern="[0-9]{10}"
                       required
                     />
+                    <p className="text-xs text-gray-500 mt-1">
+                      📱 Formato: 10 dígitos sin espacios ni guiones
+                    </p>
                   </div>
                   
                   {/* Campo de mensaje */}
@@ -253,15 +337,29 @@ export function AuroraAttendance() {
               <div className="pt-2 relative">
                 <Button
                   type="submit"
-                  className="w-full bg-aurora-primary hover:bg-aurora-secondary text-white transition-all duration-300 relative group overflow-hidden"
+                  disabled={isSubmitting || !formData.name || !formData.response || (formData.response === 'yes' && !formData.phone)}
+                  className="w-full bg-aurora-primary hover:bg-aurora-secondary text-white transition-all duration-300 relative group overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <span className="relative z-10">Enviar confirmación</span>
+                  <span className="relative z-10 flex items-center justify-center gap-2">
+                    {isSubmitting ? (
+                      <>
+                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                        Enviando...
+                      </>
+                    ) : (
+                      <>
+                        📱 Confirmar por WhatsApp
+                      </>
+                    )}
+                  </span>
                   <div className="absolute inset-0 aurora-shimmer opacity-0 group-hover:opacity-30 transition-opacity"></div>
                 </Button>
                 
-                {/* Nota de privacidad */}
-                <p className="text-gray-500 text-xs mt-3 text-center">
-                  Demo ilustrativo. En una invitación real, esta información se utilizaría únicamente para la organización del evento.
+                {/* Nota informativa */}
+                <p className="text-gray-600 text-xs mt-3 text-center">
+                  🔒 Tu confirmación se enviará via WhatsApp al número oficial de la quinceañera.
+                  <br />
+                  📱 Se abrirá WhatsApp con el mensaje prellenado para que solo tengas que enviarlo.
                 </p>
               </div>
             </form>
