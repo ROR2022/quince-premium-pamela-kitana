@@ -59,8 +59,8 @@ export const auroraDemoData = {
   // Configuración de música temática de Aurora
   music: {
     ...premiumDemoData.music,
-    title: "Perfect - Ed Sheeran",
-    track: "/images/custom/perfect.mp3", // Canción real del proyecto
+    title: "No Crezcas Más",
+    track: "/images/custom/noCrezcas.mp3", // Canción real del proyecto
     description: "Una melodía perfecta para un momento perfecto"
   },
   
