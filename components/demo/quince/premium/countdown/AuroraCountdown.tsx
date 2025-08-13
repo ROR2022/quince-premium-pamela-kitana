@@ -205,12 +205,7 @@ export function AuroraCountdown() {
           </p>
         </div>
         
-        {/* Nota del tema Aurora */}
-        <div className="mt-6 p-3 bg-aurora-50/10 backdrop-blur-sm rounded-lg border border-aurora-tertiary/20 max-w-md mx-auto">
-          <p className="text-xs text-aurora-50">
-            👑 <strong>Tema Aurora:</strong> Cuenta regresiva con efectos de cuento de hadas y detalles mágicos.
-          </p>
-        </div>
+        
       </div>
     </section>
   )

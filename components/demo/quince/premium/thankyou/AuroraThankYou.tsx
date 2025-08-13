@@ -212,12 +212,7 @@ export function AuroraThankYou() {
           <div className="absolute inset-0 bg-gradient-to-r from-aurora-primary/20 via-aurora-secondary/20 to-aurora-tertiary/20 rounded-2xl blur-xl -z-10 opacity-60 group-hover:opacity-80 transition-opacity duration-300"></div>
         </div>
         
-        {/* Nota de tema */}
-        <div className="mt-8 p-3 bg-aurora-50/10 backdrop-blur-sm rounded-lg border border-aurora-tertiary/20 max-w-md mx-auto">
-          <p className="text-xs text-aurora-secondary">
-            👑 <strong>Tema Aurora:</strong> Agradecimiento con diseño de cuento de hadas y elementos elegantes inspirados en la princesa Aurora.
-          </p>
-        </div>
+        
       </div>
     </section>
   )

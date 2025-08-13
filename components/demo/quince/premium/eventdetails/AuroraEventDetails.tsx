@@ -1,7 +1,6 @@
 "use client"
 
 import { useRef } from "react"
-import { useInView } from "framer-motion"
 import { Calendar, Clock, MapPin, Sparkles, ExternalLink } from "lucide-react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
@@ -10,7 +9,6 @@ import { auroraDemoData } from "../data/aurora-demo-data"
 
 export function AuroraEventDetails() {
   const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, amount: 0.3 })
   const { toast } = useToast()
 
   // Verificación de datos - si no existen, mostrar error
@@ -77,8 +75,7 @@ export function AuroraEventDetails() {
         className="z-0"
       />
 
-      {/* Overlay para legibilidad - FASE 1: Mejorado para mayor visibilidad */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white/92 via-aurora-50/50 to-white/88 backdrop-blur-md z-5"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-white/95 via-white/85 to-white/95 backdrop-blur-lg z-5"></div>
 
       {/* Elementos decorativos flotantes - FASE 3: Fortalecidos */}
       <div className="absolute top-20 left-[10%] w-8 h-8 text-aurora-tertiary opacity-70 animate-pulse-slow z-5 drop-shadow-[0_2px_8px_rgba(180,80,255,0.25)]">
@@ -124,12 +121,7 @@ export function AuroraEventDetails() {
       </div>
 
       {/* Contenido principal */}
-      <div
-        ref={ref}
-        className={`relative z-10 max-w-6xl mx-auto text-center transition-all duration-1000 ${
-          isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-        }`}
-      >
+      <div ref={ref} className="relative z-10 max-w-6xl mx-auto text-center opacity-100 translate-y-0">
         {/* Header con estilo Aurora */}
         <div className="mb-12">
           {/* Badge y Header - FASE 2: Intensificados */}
@@ -177,13 +169,12 @@ export function AuroraEventDetails() {
 
         {/* Grid de detalles del evento */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-          {/* Ceremonia - CAMBIO: Aplicado el mismo fondo que código de vestimenta */}
+          {/* Ceremonia */}
           <div
             data-testid="ceremony-section"
-            className="bg-white/95 backdrop-blur-md rounded-2xl p-10 border-2 border-aurora-primary/50 shadow-2xl ring-2 ring-aurora-primary/30 hover:shadow-2xl transition-all duration-300 relative overflow-hidden group"
+            className="bg-white/98 backdrop-blur-lg rounded-2xl p-10 border-2 border-aurora-primary/50 shadow-2xl ring-2 ring-aurora-primary/30 hover:shadow-2xl transition-all duration-300 relative overflow-hidden group"
             style={{ position: "static", zIndex: "auto", pointerEvents: "auto" }}
           >
-            {/* CAMBIO: Agregado efecto shimmer de fondo igual al código de vestimenta */}
             <div className="absolute inset-0 aurora-shimmer opacity-20 group-hover:opacity-30 transition-opacity duration-300"></div>
 
             {/* Icono decorativo */}
@@ -206,16 +197,16 @@ export function AuroraEventDetails() {
               <div className="flex items-center gap-3">
                 <Clock className="w-5 h-5 text-aurora-secondary flex-shrink-0" />
                 <div>
-                  <p className="font-semibold text-aurora-primary">{auroraDemoData.event.ceremony.time}</p>
-                  <p className="text-sm text-aurora-secondary">Misa de Acción de Gracias</p>
+                  <p className="font-bold text-gray-900">{auroraDemoData.event.ceremony.time}</p>
+                  <p className="text-sm text-gray-700 font-medium">Misa de Acción de Gracias</p>
                 </div>
               </div>
 
               <div className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-aurora-secondary flex-shrink-0 mt-1" />
                 <div>
-                  <p className="font-semibold text-aurora-primary">{auroraDemoData.event.ceremony.venue}</p>
-                  <p className="text-sm text-aurora-secondary leading-relaxed">
+                  <p className="font-bold text-gray-900">{auroraDemoData.event.ceremony.venue}</p>
+                  <p className="text-sm text-gray-700 font-medium leading-relaxed">
                     {auroraDemoData.event.ceremony.address}
                   </p>
                 </div>
@@ -236,13 +227,12 @@ export function AuroraEventDetails() {
             </Button>
           </div>
 
-          {/* Recepción - CAMBIO: Aplicado el mismo fondo que código de vestimenta */}
+          {/* Recepción */}
           <div
             data-testid="party-section"
-            className="bg-white/95 backdrop-blur-md rounded-2xl p-10 border-2 border-aurora-primary/50 shadow-2xl ring-2 ring-aurora-primary/30 hover:shadow-2xl transition-all duration-300 relative overflow-hidden group"
+            className="bg-white/98 backdrop-blur-lg rounded-2xl p-10 border-2 border-aurora-primary/50 shadow-2xl ring-2 ring-aurora-primary/30 hover:shadow-2xl transition-all duration-300 relative overflow-hidden group"
             style={{ position: "static", zIndex: "auto", pointerEvents: "auto" }}
           >
-            {/* CAMBIO: Agregado efecto shimmer de fondo igual al código de vestimenta */}
             <div className="absolute inset-0 aurora-shimmer opacity-20 group-hover:opacity-30 transition-opacity duration-300"></div>
 
             {/* Icono decorativo */}
@@ -265,16 +255,18 @@ export function AuroraEventDetails() {
               <div className="flex items-center gap-3">
                 <Clock className="w-5 h-5 text-aurora-secondary flex-shrink-0" />
                 <div>
-                  <p className="font-semibold text-aurora-primary">{auroraDemoData.event.party.time}</p>
-                  <p className="text-sm text-aurora-secondary">Celebración y Fiesta</p>
+                  <p className="font-bold text-gray-900">{auroraDemoData.event.party.time}</p>
+                  <p className="text-sm text-gray-700 font-medium">Celebración y Fiesta</p>
                 </div>
               </div>
 
               <div className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-aurora-secondary flex-shrink-0 mt-1" />
                 <div>
-                  <p className="font-semibold text-aurora-primary">{auroraDemoData.event.party.venue}</p>
-                  <p className="text-sm text-aurora-secondary leading-relaxed">{auroraDemoData.event.party.address}</p>
+                  <p className="font-bold text-gray-900">{auroraDemoData.event.party.venue}</p>
+                  <p className="text-sm text-gray-700 font-medium leading-relaxed">
+                    {auroraDemoData.event.party.address}
+                  </p>
                 </div>
               </div>
             </div>
@@ -293,9 +285,8 @@ export function AuroraEventDetails() {
             </Button>
           </div>
 
-          {/* Código de Vestimenta - FASE 5: Mejorada */}
-          <div className="bg-white/95 backdrop-blur-md rounded-2xl p-10 border-2 border-aurora-primary/50 shadow-2xl ring-2 ring-aurora-primary/30 hover:shadow-2xl transition-all duration-300 relative overflow-hidden group md:col-span-2 lg:col-span-1">
-            {/* Efecto shimmer de fondo */}
+          {/* Código de Vestimenta */}
+          <div className="bg-white/98 backdrop-blur-lg rounded-2xl p-10 border-2 border-aurora-primary/50 shadow-2xl ring-2 ring-aurora-primary/30 hover:shadow-2xl transition-all duration-300 relative overflow-hidden group md:col-span-2 lg:col-span-1">
             <div className="absolute inset-0 aurora-shimmer opacity-20 group-hover:opacity-30 transition-opacity duration-300"></div>
 
             {/* Icono decorativo */}
@@ -311,9 +302,9 @@ export function AuroraEventDetails() {
 
             <div className="space-y-4">
               <div className="text-center">
-                <p className="text-lg font-semibold text-aurora-primary mb-2">{auroraDemoData.event.dressCode}</p>
+                <p className="text-lg font-bold text-gray-900 mb-2">{auroraDemoData.event.dressCode}</p>
                 <div className="bg-aurora-accent/20 rounded-lg p-4 border border-aurora-tertiary/30">
-                  <p className="text-sm text-aurora-secondary leading-relaxed">
+                  <p className="text-sm text-gray-800 font-semibold leading-relaxed">
                     <strong>Importante:</strong> Rosa Gold es un color exclusivo para la quinceañera. Les agradecemos
                     respetar esta tradición especial.
                   </p>
@@ -323,8 +314,8 @@ export function AuroraEventDetails() {
           </div>
         </div>
 
-        {/* Información adicional - FASE 6: Mejorada */}
-        <div className="mt-12 bg-white/95 backdrop-blur-md rounded-2xl p-10 border-2 border-aurora-primary/50 shadow-2xl ring-2 ring-aurora-primary/30 relative overflow-hidden">
+        {/* Información adicional */}
+        <div className="mt-12 bg-white/98 backdrop-blur-lg rounded-2xl p-10 border-2 border-aurora-primary/50 shadow-2xl ring-2 ring-aurora-primary/30 relative overflow-hidden">
           <div className="absolute inset-0 aurora-shimmer opacity-25"></div>
 
           <div className="relative z-10">
@@ -338,7 +329,7 @@ export function AuroraEventDetails() {
                   <Sparkles className="w-5 h-5 drop-shadow-[0_2px_6px_rgba(180,80,255,0.18)]" />
                   Antes del Evento
                 </h4>
-                <ul className="space-y-2 text-gray-800 font-medium">
+                <ul className="space-y-2 text-gray-900 font-semibold">
                   <li>• Confirmar asistencia con anticipación</li>
                   <li>• Llegar 30 minutos antes a la ceremonia</li>
                   <li>• Respetar el código de vestimenta</li>
@@ -351,7 +342,7 @@ export function AuroraEventDetails() {
                   <Sparkles className="w-5 h-5 drop-shadow-[0_2px_6px_rgba(180,80,255,0.18)]" />
                   Durante la Celebración
                 </h4>
-                <ul className="space-y-2 text-gray-800 font-medium">
+                <ul className="space-y-2 text-gray-900 font-semibold">
                   <li>• Estacionamiento gratuito disponible</li>
                   <li>• Cena y baile en la recepción</li>
                   <li>• Mesa de regalos disponible</li>
@@ -360,14 +351,6 @@ export function AuroraEventDetails() {
               </div>
             </div>
           </div>
-        </div>
-
-        {/* Nota del tema Aurora - FASE 7: Mejorada */}
-        <div className="mt-12 p-4 bg-aurora-100/90 rounded-lg border-2 border-aurora-primary/40 max-w-2xl mx-auto backdrop-blur-md shadow-md">
-          <p className="text-sm text-gray-900 font-semibold">
-            👑 <strong>Tema Aurora:</strong> Detalles del evento con diseño de cuento de hadas para una experiencia
-            mágica e inolvidable.
-          </p>
         </div>
       </div>
     </section>
