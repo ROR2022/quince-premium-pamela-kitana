@@ -9,6 +9,7 @@ import { AuroraThankYou } from "@/components/demo/quince/premium/thankyou/Aurora
 import { AuroraMusicPlayer } from "@/components/demo/quince/premium/AuroraMusicPlayer";
 import { auroraDemoData } from "@/components/demo/quince/premium/data/aurora-demo-data";
 import EspecialGallery from "@/components/demo/quince/premium/gallery/EspecialGallery";
+import CustomInvitations from "@/components/demo/quince/premium/CustomInvitations";
 
 export default function LandingPage() {
   return (
@@ -39,7 +40,9 @@ export default function LandingPage() {
               
               {/* Opciones de regalo con tema Aurora */}
               <AuroraGifts />
-              
+
+              <CustomInvitations />
+
               {/* Agradecimiento con tema Aurora */}
               <AuroraThankYou />
       
